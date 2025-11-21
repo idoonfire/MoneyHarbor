@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import FilterForm from '@/components/FilterForm';
 import InvestmentCard from '@/components/InvestmentCard';
@@ -8,6 +8,33 @@ import ComparisonTable from '@/components/ComparisonTable';
 import InvestmentDetailsModal from '@/components/InvestmentDetailsModal';
 import { investmentOptions } from '@/lib/investments';
 import { getTopRecommendations, UserPreferences, ScoredInvestment } from '@/lib/scoring';
+
+// Helper function to save search batches to localStorage for "My Harbor"
+function saveSearchesToLocalStorage(recommendations: any[], preferences: UserPreferences) {
+  try {
+    const existing = localStorage.getItem('moneyHarbor_batches');
+    const existingBatches = existing ? JSON.parse(existing) : [];
+    
+    // Save as a batch (group of 3 recommendations) with FULL data
+    const newBatch = {
+      id: `batch-${Date.now()}`,
+      amount: preferences.amount,
+      timeHorizon: preferences.timeHorizon,
+      riskLevel: preferences.riskLevel,
+      recommendationsCount: 0, // How many investments user made from this batch (0-3)
+      recommendations: recommendations.slice(0, 3), // Save FULL recommendation data
+      status: 'לא ביצעתי', // "ביצעתי באחת" | "השקעה משולבת" | "לא ביצעתי"
+      createdAt: new Date().toISOString(),
+    };
+    
+    const combined = [newBatch, ...existingBatches];
+    localStorage.setItem('moneyHarbor_batches', JSON.stringify(combined));
+    
+    console.log('✅ Search batch saved to My Harbor');
+  } catch (error) {
+    console.error('Error saving searches:', error);
+  }
+}
 
 export default function Home() {
   const [recommendations, setRecommendations] = useState<ScoredInvestment[] | null>(null);
@@ -54,6 +81,9 @@ export default function Home() {
         // Fallback to rule-based algorithm
         const results = getTopRecommendations(investmentOptions, preferences);
         setRecommendations(results);
+        
+        // Save searches to localStorage for "My Harbor" feature
+        saveSearchesToLocalStorage(results, preferences);
       } else {
         // Use AI recommendations
         console.log('✅ Using AI recommendations');
@@ -67,12 +97,18 @@ export default function Home() {
           suitableFor: ['מתחיל', 'בינוני', 'מתקדם'],
         }));
         setRecommendations(aiRecommendations);
+        
+        // Save searches to localStorage for "My Harbor" feature
+        saveSearchesToLocalStorage(aiRecommendations, preferences);
       }
     } catch (error) {
       console.error('Error fetching AI recommendations:', error);
       // Fallback to rule-based algorithm on error
       const results = getTopRecommendations(investmentOptions, preferences);
       setRecommendations(results);
+      
+      // Save searches to localStorage for "My Harbor" feature
+      saveSearchesToLocalStorage(results, preferences);
     }
 
     clearInterval(stepInterval);

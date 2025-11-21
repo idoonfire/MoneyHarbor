@@ -62,7 +62,7 @@ export default function InvestmentCard({ investment, onShowDetails }: Investment
             color: '#ffd700',
             border: '1px solid rgba(255, 215, 0, 0.2)'
           }}>
-            {investment.timeHorizon[0]}
+            {investment.timeHorizon?.[0] || investment.timeHorizon || 'בינוני'}
           </span>
         </div>
       </div>
@@ -70,20 +70,22 @@ export default function InvestmentCard({ investment, onShowDetails }: Investment
       {/* Content - Very brief */}
       <div className="p-5 flex-1 flex flex-col" style={{ backgroundColor: 'rgba(26, 26, 26, 0.3)' }}>
         <p className="text-sm leading-relaxed mb-4" style={{ color: '#b0b0b0' }}>
-          {investment.description.substring(0, 100)}...
+          {investment.description?.substring(0, 100) || 'אפיק השקעה'}...
         </p>
 
         {/* Quick highlights */}
-        <div className="text-xs space-y-1.5 mb-4">
-          <div className="flex items-center gap-2">
-            <span className="text-success">+</span>
-            <span style={{ color: '#8a8a8a' }}>{investment.pros[0]}</span>
+        {investment.pros?.[0] && investment.cons?.[0] && (
+          <div className="text-xs space-y-1.5 mb-4">
+            <div className="flex items-center gap-2">
+              <span className="text-success">+</span>
+              <span style={{ color: '#8a8a8a' }}>{investment.pros[0]}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-warning">−</span>
+              <span style={{ color: '#8a8a8a' }}>{investment.cons[0]}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-warning">−</span>
-            <span style={{ color: '#8a8a8a' }}>{investment.cons[0]}</span>
-          </div>
-        </div>
+        )}
 
         {/* CTA Button */}
         <div className="mt-auto pt-3 border-t" style={{ borderColor: 'rgba(138, 138, 138, 0.15)' }}>

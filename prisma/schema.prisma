@@ -1,0 +1,79 @@
+// Prisma schema for MoneyHarbor "My Harbor" feature
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+// User model - stores user information
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  searches      Search[]
+  reminders     Reminder[]
+  
+  @@map("users")
+}
+
+// Search model - stores investment search history
+model Search {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Search parameters
+  investmentName    String
+  investmentType    String?
+  amount            Int
+  timeHorizon       String
+  riskLevel         String
+  
+  // Investment details (from AI recommendation)
+  description       String?  @db.Text
+  matchReason       String?  @db.Text
+  expectedReturn    Float?
+  
+  // User actions
+  status            String   @default("לא ביצעתי") // "ביצעתי" | "בתהליך" | "לא ביצעתי"
+  statusUpdatedAt   DateTime?
+  
+  // Metadata
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  reminders         Reminder[]
+  
+  @@map("searches")
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// Reminder model - stores reminders for follow-up
+model Reminder {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  searchId      String
+  search        Search   @relation(fields: [searchId], references: [id], onDelete: Cascade)
+  
+  reminderDate  DateTime
+  sent          Boolean  @default(false)
+  sentAt        DateTime?
+  
+  createdAt     DateTime @default(now())
+  
+  @@map("reminders")
+  @@index([userId])
+  @@index([reminderDate])
+  @@index([sent])
+}

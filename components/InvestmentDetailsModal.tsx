@@ -99,18 +99,18 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
-        <button
-          onClick={onClose}
+          <button
+            onClick={onClose}
           className="absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:rotate-90"
-          style={{
-            background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
-            color: '#0a0a0a',
-            fontSize: '18px',
-            fontWeight: 'bold'
-          }}
-        >
-          ✕
-        </button>
+            style={{
+              background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+              color: '#0a0a0a',
+              fontSize: '18px',
+              fontWeight: 'bold'
+            }}
+          >
+            ✕
+          </button>
 
         {/* Content */}
         <div className="p-8 text-center">
@@ -129,7 +129,7 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
 
           {/* Description */}
           <p className="text-base mb-8 leading-relaxed max-w-2xl mx-auto" style={{ color: '#b0b0b0' }}>
-            {investment.description}
+            {investment.description || 'אפיק השקעה מומלץ'}
           </p>
 
           {/* Quick Stats - 3 Cards */}
@@ -140,7 +140,7 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
             }}>
               <div className="text-xs mb-1" style={{ color: '#8a8a8a' }}>טווח זמן</div>
               <div className="font-bold text-base" style={{ color: '#ffd700' }}>
-                {investment.timeHorizon.join(', ')}
+                {Array.isArray(investment.timeHorizon) ? investment.timeHorizon.join(', ') : investment.timeHorizon}
               </div>
             </div>
 
@@ -150,7 +150,7 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
             }}>
               <div className="text-xs mb-1" style={{ color: '#8a8a8a' }}>נזילות</div>
               <div className="font-bold text-base" style={{ color: '#ffd700' }}>
-                {investment.liquidity}
+                {investment.liquidity || 'בינונית'}
               </div>
             </div>
 
@@ -166,26 +166,26 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
           </div>
 
           {/* Main CTA */}
-          <div className="space-y-4">
+            <div className="space-y-4">
             <div className="border-t border-b py-6" style={{ borderColor: 'rgba(255, 215, 0, 0.2)' }}>
               <p className="text-sm mb-3" style={{ color: '#8a8a8a' }}>
                 רוצה לקבל דוח מפורט עם כל המידע, המלצות ומדריך מעשי?
               </p>
-              <button
-                onClick={() => setShowEmailPopup(true)}
+          <button
+            onClick={() => setShowEmailPopup(true)}
                 className="w-full py-4 rounded-xl text-lg font-extrabold transition-all hover:scale-105"
-                style={{
-                  background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
-                  color: '#0a0a0a',
+            style={{
+              background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+              color: '#0a0a0a',
                   boxShadow: '0 10px 30px rgba(255, 215, 0, 0.3)'
-                }}
-              >
+            }}
+          >
                 📄 קבל דו״ח מקצועי למייל
-              </button>
+          </button>
               <p className="text-xs mt-3" style={{ color: '#5a5a5a' }}>
                 הדו״ח כולל: ניתוח מעמיק • גרף תשואה • פלטפורמות • עלויות • מדריך התחלה
               </p>
-            </div>
+        </div>
 
             {/* Match Reason if exists */}
             {investment.matchReason && (
@@ -199,8 +199,8 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
                 </p>
               </div>
             )}
-          </div>
-        </div>
+              </div>
+            </div>
 
         {/* Email Popup */}
         {showEmailPopup && !emailSent && (
