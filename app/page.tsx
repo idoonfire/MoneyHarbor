@@ -49,6 +49,7 @@ export default function Home() {
   const [showComparison, setShowComparison] = useState(false);
   const [selectedInvestment, setSelectedInvestment] = useState<ScoredInvestment | null>(null);
   const [userAmount, setUserAmount] = useState<number>(0);
+  const [formKey, setFormKey] = useState(0); // Key to force form reset
 
   // Reset search function
   const resetSearch = () => {
@@ -58,6 +59,7 @@ export default function Home() {
     setShowComparison(false);
     setSelectedInvestment(null);
     setIsLoading(false);
+    setFormKey(prev => prev + 1); // Increment key to remount form
     
     // Scroll to form
     setTimeout(() => {
@@ -298,7 +300,7 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Filter Form Section */}
         <div id="investment-form" className="mb-12 scroll-mt-20">
-          <FilterForm onSubmit={handleFormSubmit} isLoading={isLoading} />
+          <FilterForm key={formKey} onSubmit={handleFormSubmit} isLoading={isLoading} />
         </div>
 
         {/* Loading - Interactive with Skeleton Cards */}
