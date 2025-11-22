@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import * as brevo from '@getbrevo/brevo';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Brevo API
+const apiInstance = new brevo.TransactionalEmailsApi();
+apiInstance.setApiKey(
+  brevo.TransactionalEmailsApiApiKeys.apiKey,
+  process.env.BREVO_API_KEY || ''
+);
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,12 +27,8 @@ export async function POST(request: NextRequest) {
 
     console.log('📧 Sending reminder confirmation to:', email);
 
-    // שלח מייל אישור מיידי
-    await resend.emails.send({
-      from: 'MoneyHarbor <onboarding@resend.dev>',
-      to: email,
-      subject: '🔔 תזכורת נקבעה - MoneyHarbor',
-      html: `
+    // Prepare HTML content
+    const htmlContent = `
 <!DOCTYPE html>
 <html dir="rtl" lang="he">
 <head>
@@ -82,8 +83,16 @@ export async function POST(request: NextRequest) {
   </div>
 </body>
 </html>
-      `
-    });
+    `;
+
+    // Send reminder confirmation email via Brevo
+    const sendSmtpEmail = new brevo.SendSmtpEmail();
+    sendSmtpEmail.sender = { name: "MoneyHarbor", email: "noreply@moneyharbor.online" };
+    sendSmtpEmail.to = [{ email: email }];
+    sendSmtpEmail.subject = '🔔 תזכורת נקבעה - MoneyHarbor';
+    sendSmtpEmail.htmlContent = htmlContent;
+
+    await apiInstance.sendTransacEmail(sendSmtpEmail);
 
     console.log('✅ Reminder confirmation sent successfully');
 

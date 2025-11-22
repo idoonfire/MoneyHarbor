@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import * as brevo from '@getbrevo/brevo';
 import { prisma } from '@/lib/prisma';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Brevo API
+const apiInstance = new brevo.TransactionalEmailsApi();
+apiInstance.setApiKey(
+  brevo.TransactionalEmailsApiApiKeys.apiKey,
+  process.env.BREVO_API_KEY || ''
+);
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,14 +38,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('📧 Sending email with PDF attachment...');
+    console.log('📧 Sending email with PDF attachment via Brevo...');
 
-    // Send email with PDF attachment
-    const data = await resend.emails.send({
-      from: 'MoneyHarbor <onboarding@resend.dev>',
-      to: email,
-      subject: `דו"ח השקעה מ-MoneyHarbor: ${investment.name}`,
-      html: `
+    // Prepare HTML content
+    const htmlContent = `
 <!DOCTYPE html>
 <html dir="rtl" lang="he">
 <head>
@@ -105,14 +106,20 @@ export async function POST(request: NextRequest) {
   </div>
 </body>
 </html>
-      `,
-      attachments: [
-        {
-          filename: `MoneyHarbor-Investment-Report-${Date.now()}.pdf`,
-          content: Buffer.from(pdfBase64, 'base64'),
-        },
-      ],
-    });
+    `;
+
+    // Send email with PDF attachment via Brevo
+    const sendSmtpEmail = new brevo.SendSmtpEmail();
+    sendSmtpEmail.sender = { name: "MoneyHarbor", email: "noreply@moneyharbor.online" };
+    sendSmtpEmail.to = [{ email: email, name: fullName || email }];
+    sendSmtpEmail.subject = `דוח השקעה מ-MoneyHarbor: ${investment.name}`;
+    sendSmtpEmail.htmlContent = htmlContent;
+    sendSmtpEmail.attachment = [{
+      content: pdfBase64,
+      name: `MoneyHarbor-Investment-Report-${Date.now()}.pdf`
+    }];
+
+    const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
 
     console.log('✅ Email with PDF sent successfully:', data);
 
