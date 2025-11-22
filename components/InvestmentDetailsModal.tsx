@@ -27,86 +27,78 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
   const [emailSent, setEmailSent] = useState(false);
 
   const handleSendEmail = async (email: string, fullName: string) => {
-    setIsSending(true);
+    // Close popup and show success immediately
+    setShowEmailPopup(false);
+    setEmailSent(true);
     
-    // Show success immediately after 1 second
-    const quickFeedback = setTimeout(() => {
-      setEmailSent(true);
-      setShowEmailPopup(false);
-    }, 1000);
+    // Close success message and modal after 2 seconds
+    setTimeout(() => {
+      setEmailSent(false);
+      onClose();
+    }, 2000);
     
-    try {
-      console.log('🤖 Generating detailed guide with AI...');
-      
-      let detailedGuide = null;
+    // Send email in background - fire and forget
+    (async () => {
       try {
-        const guideResponse = await fetch('/api/expand-guide', {
+        console.log('🤖 Generating detailed guide with AI in background...');
+        
+        let detailedGuide = null;
+        try {
+          const guideResponse = await fetch('/api/expand-guide', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ investment })
+          });
+          
+          if (guideResponse.ok) {
+            const guideData = await guideResponse.json();
+            detailedGuide = guideData.guide;
+            console.log('✅ Detailed guide generated');
+          }
+        } catch (error) {
+          console.error('⚠️ Error generating detailed guide:', error);
+        }
+        
+        console.log('📄 Generating PDF in background...');
+        
+        const pdfBase64 = await generateInvestmentPDFClient(investment, userAmount, detailedGuide);
+        console.log('✅ PDF generated');
+        
+        console.log('📧 Sending email...');
+        
+        // Get user's original search preferences for database tracking
+        const savedPreferences = localStorage.getItem('moneyHarbor_lastPreferences');
+        const preferences = savedPreferences ? JSON.parse(savedPreferences) : {};
+        
+        // Send email
+        const response = await fetch('/api/send-report', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ investment })
+          body: JSON.stringify({ 
+            email, 
+            fullName, 
+            investment, 
+            pdfBase64,
+            searchParams: {
+              amount: userAmount,
+              timeHorizon: preferences.timeHorizon || investment.timeHorizon,
+              riskLevel: preferences.riskLevel || investment.riskLevel,
+              knowledgeLevel: preferences.knowledgeLevel,
+              additionalNotes: preferences.additionalNotes,
+            }
+          })
         });
         
-        if (guideResponse.ok) {
-          const guideData = await guideResponse.json();
-          detailedGuide = guideData.guide;
-          console.log('✅ Detailed guide generated');
-        }
-      } catch (error) {
-        console.error('⚠️ Error generating detailed guide:', error);
-      }
-      
-      console.log('📄 Generating PDF...');
-      
-      const pdfBase64 = await generateInvestmentPDFClient(investment, userAmount, detailedGuide);
-      console.log('✅ PDF generated');
-      
-      console.log('📧 Sending email in background...');
-      
-      // Get user's original search preferences for database tracking
-      const savedPreferences = localStorage.getItem('moneyHarbor_lastPreferences');
-      const preferences = savedPreferences ? JSON.parse(savedPreferences) : {};
-      
-      // Send email in background (don't wait for response)
-      fetch('/api/send-report', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          email, 
-          fullName, 
-          investment, 
-          pdfBase64,
-          searchParams: {
-            amount: userAmount,
-            timeHorizon: preferences.timeHorizon || investment.timeHorizon,
-            riskLevel: preferences.riskLevel || investment.riskLevel,
-            knowledgeLevel: preferences.knowledgeLevel,
-            additionalNotes: preferences.additionalNotes,
-          }
-        })
-      }).then(response => {
         if (response.ok) {
           console.log('✅ Email sent successfully in background');
         } else {
           console.error('❌ Email failed to send');
         }
-      }).catch(error => {
-        console.error('Error sending email:', error);
-      });
-
-      // User already sees success message after 1 second
-      setTimeout(() => {
-        setEmailSent(false);
-        onClose();
-      }, 2000);
-      
-    } catch (error) {
-      clearTimeout(quickFeedback);
-      console.error('Error:', error);
-      alert('שגיאה. אנא נסה שוב.');
-      setEmailSent(false);
-      setShowEmailPopup(true);
-    }
-    setIsSending(false);
+        
+      } catch (error) {
+        console.error('❌ Background email error:', error);
+      }
+    })();
   };
 
   const getRiskColor = (risk: string) => {
