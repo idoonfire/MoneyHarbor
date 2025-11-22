@@ -92,6 +92,17 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
     };
 
     onSubmit(preferences);
+    
+    // Scroll to results section after submit
+    setTimeout(() => {
+      const resultsSection = document.getElementById('results-section');
+      if (resultsSection) {
+        resultsSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 300);
   };
 
   const formatCurrency = (value: number) => {

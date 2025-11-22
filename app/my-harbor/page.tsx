@@ -25,7 +25,9 @@ export default function MyHarborPage() {
   const [expandedBatch, setExpandedBatch] = useState<string | null>(null);
   const [selectedInvestment, setSelectedInvestment] = useState<any>(null);
   const [selectedBatchAmount, setSelectedBatchAmount] = useState<number>(0);
-  const [showReminderSetup, setShowReminderSetup] = useState(false);
+  const [showReminderPopup, setShowReminderPopup] = useState(false);
+  const [reminderEmail, setReminderEmail] = useState('');
+  const [sendingReminder, setSendingReminder] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('moneyHarbor_batches');
@@ -63,15 +65,39 @@ export default function MyHarborPage() {
     setTotalInvestments(totalInvested);
   };
 
-  const setupGlobalReminder = () => {
-    const sixMonthsLater = new Date();
-    sixMonthsLater.setMonth(sixMonthsLater.getMonth() + 6);
+  const setupGlobalReminder = async () => {
+    if (!reminderEmail || !reminderEmail.includes('@')) {
+      alert('אנא הזן כתובת מייל תקינה');
+      return;
+    }
+
+    setSendingReminder(true);
     
-    // Save global reminder
-    localStorage.setItem('globalReminder', sixMonthsLater.toISOString());
+    try {
+      // שלח בקשה לשרת לשמור תזכורת ולשלוח מייל
+      const response = await fetch('/api/set-reminder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: reminderEmail,
+          reminderDate: new Date(Date.now() + 6 * 30 * 24 * 60 * 60 * 1000) // 6 חודשים
+        })
+      });
+
+      if (response.ok) {
+        localStorage.setItem('globalReminder', new Date(Date.now() + 6 * 30 * 24 * 60 * 60 * 1000).toISOString());
+        alert('תזכורת נשמרה בהצלחה! נשלח לך מייל תזכורת בעוד 6 חודשים 🎉');
+        setShowReminderPopup(false);
+        setReminderEmail('');
+      } else {
+        alert('שגיאה בשמירת התזכורת. אנא נסה שוב.');
+      }
+    } catch (error) {
+      console.error('Error setting reminder:', error);
+      alert('שגיאה בשמירת התזכורת. אנא נסה שוב.');
+    }
     
-    alert('תזכורת נקבעה ל-' + sixMonthsLater.toLocaleDateString('he-IL') + '\n\nנשלח לך מייל תזכורת לבדוק מחדש את הנמל שלך!');
-    setShowReminderSetup(false);
+    setSendingReminder(false);
   };
 
   const getStatusMessage = () => {
@@ -342,7 +368,7 @@ export default function MyHarborPage() {
             רוצה שנזכיר לך לבדוק שוב את הנמל בעוד 6 חודשים?
           </p>
           <button
-            onClick={setupGlobalReminder}
+            onClick={() => setShowReminderPopup(true)}
             className="w-full py-3 rounded-lg text-sm font-bold transition-all hover:scale-[1.02]"
             style={{
               background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
@@ -377,6 +403,79 @@ export default function MyHarborPage() {
           userAmount={selectedBatchAmount}
           onClose={() => setSelectedInvestment(null)}
         />
+      )}
+
+      {/* Reminder Email Popup */}
+      {showReminderPopup && (
+        <div 
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+          onClick={() => setShowReminderPopup(false)}
+        >
+          <div 
+            className="border rounded-xl p-6 max-w-md w-full mx-4"
+            style={{
+              backgroundColor: '#1a1a1a',
+              borderColor: 'rgba(255, 215, 0, 0.5)',
+              borderWidth: '2px'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-xl font-bold mb-4" style={{ color: '#ffd700' }}>
+              📧 תזכורת למייל
+            </h3>
+            
+            <p className="text-sm mb-4" style={{ color: '#b0b0b0' }}>
+              נשלח לך מייל תזכורת לבדוק מחדש את הנמל שלך בעוד 6 חודשים
+            </p>
+            
+            <div className="mb-4">
+              <label className="block text-sm mb-2 font-medium" style={{ color: '#b0b0b0' }}>
+                כתובת מייל
+              </label>
+              <input
+                type="email"
+                value={reminderEmail}
+                onChange={(e) => setReminderEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="w-full px-4 py-3 rounded-lg text-base border-2 transition-all focus:outline-none focus:ring-2"
+                style={{
+                  backgroundColor: '#0a0a0a',
+                  borderColor: 'rgba(255, 215, 0, 0.3)',
+                  color: '#e5e4e2'
+                }}
+                disabled={sendingReminder}
+              />
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowReminderPopup(false)}
+                disabled={sendingReminder}
+                className="flex-1 py-3 rounded-lg font-semibold border transition-all hover:opacity-70"
+                style={{
+                  backgroundColor: 'transparent',
+                  borderColor: 'rgba(138, 138, 138, 0.4)',
+                  color: '#8a8a8a'
+                }}
+              >
+                ביטול
+              </button>
+              <button
+                onClick={setupGlobalReminder}
+                disabled={sendingReminder || !reminderEmail}
+                className="flex-1 py-3 rounded-lg font-semibold transition-all"
+                style={{
+                  background: sendingReminder ? '#555' : 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+                  color: '#0a0a0a',
+                  opacity: sendingReminder || !reminderEmail ? 0.5 : 1,
+                  cursor: sendingReminder || !reminderEmail ? 'not-allowed' : 'pointer'
+                }}
+              >
+                {sendingReminder ? 'שולח...' : 'שלח תזכורת 🔔'}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );
