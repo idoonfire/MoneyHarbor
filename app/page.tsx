@@ -50,6 +50,7 @@ export default function Home() {
   const [selectedInvestment, setSelectedInvestment] = useState<ScoredInvestment | null>(null);
   const [userAmount, setUserAmount] = useState<number>(0);
   const [formKey, setFormKey] = useState(0); // Key to force form reset
+  const [showToast, setShowToast] = useState(false); // Toast for "saved to my harbor"
 
   // Reset search function
   const resetSearch = () => {
@@ -464,7 +465,7 @@ export default function Home() {
         {/* Simple Footer */}
         <div className="text-center py-8">
           <p className="text-sm" style={{ color: '#8a8a8a' }}>
-            © 2025 MoneyHarbor | <span style={{ color: '#ffd700' }}>נבנה עם ❤️ למשקיעים בישראל</span>
+            © 2025 MoneyHarbor | <span style={{ color: '#ffd700' }}>נמל הכסף – כלי חינוכי להשקעות פסיביות למשקיעים בישראל</span>
           </p>
         </div>
       </div>
@@ -483,7 +484,47 @@ export default function Home() {
           investment={selectedInvestment}
           userAmount={userAmount}
           onClose={() => setSelectedInvestment(null)}
+          onEmailSent={() => {
+            setShowToast(true);
+            setTimeout(() => setShowToast(false), 5000);
+          }}
         />
+      )}
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div 
+          className="fixed bottom-8 right-8 z-[100] animate-slide-up"
+          style={{
+            animation: 'slideUp 0.3s ease-out'
+          }}
+        >
+          <div 
+            className="border rounded-xl p-4 shadow-2xl flex items-start gap-3 max-w-md"
+            style={{
+              backgroundColor: '#1a1a1a',
+              borderColor: 'rgba(255, 215, 0, 0.6)',
+              borderWidth: '2px'
+            }}
+          >
+            <div className="text-2xl">⚓</div>
+            <div className="flex-1">
+              <p className="text-sm font-semibold mb-1" style={{ color: '#ffd700' }}>
+                נשמר בהנמל שלך!
+              </p>
+              <p className="text-xs" style={{ color: '#b0b0b0' }}>
+                שמנו את החיפוש הזה גם ב&apos;הנמל שלי&apos; – תוכל לעקוב אחרי ההתקדמות משם.
+              </p>
+            </div>
+            <button
+              onClick={() => setShowToast(false)}
+              className="text-xs hover:opacity-70 transition-opacity"
+              style={{ color: '#8a8a8a' }}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
       )}
     </main>
   );

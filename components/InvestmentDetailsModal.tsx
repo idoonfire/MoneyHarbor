@@ -19,9 +19,10 @@ interface InvestmentDetailsModalProps {
   };
   userAmount: number;
   onClose: () => void;
+  onEmailSent?: () => void;
 }
 
-export default function InvestmentDetailsModal({ investment, userAmount, onClose }: InvestmentDetailsModalProps) {
+export default function InvestmentDetailsModal({ investment, userAmount, onClose, onEmailSent }: InvestmentDetailsModalProps) {
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
@@ -30,6 +31,11 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
     // Close popup and show success immediately
     setShowEmailPopup(false);
     setEmailSent(true);
+    
+    // Trigger toast notification
+    if (onEmailSent) {
+      onEmailSent();
+    }
     
     // Close success message and modal after 2 seconds
     setTimeout(() => {
