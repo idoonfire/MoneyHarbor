@@ -74,7 +74,7 @@ export default function AdminLeadsPage() {
               <div className="grid grid-cols-4 gap-4">
                 <div className="text-center">
                   <div className="text-3xl font-bold" style={{ color: '#ffd700' }}>{leads.length}</div>
-                  <div className="text-xs" style={{ color: '#8a8a8a' }}>סה"כ לידים</div>
+                  <div className="text-xs" style={{ color: '#8a8a8a' }}>סה״כ לידים</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold" style={{ color: '#10b981' }}>
