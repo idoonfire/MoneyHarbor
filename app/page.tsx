@@ -178,7 +178,7 @@ export default function Home() {
             color: '#ffd700',
             border: '1px solid rgba(255, 215, 0, 0.3)'
           }}>
-            פלטפורמה חינוכית
+            כלי חינוכי – לא ייעוץ השקעות
           </div>
           
           <div className="flex flex-col items-center gap-8 mb-8">
