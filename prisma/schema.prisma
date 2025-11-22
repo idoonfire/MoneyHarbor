@@ -77,3 +77,33 @@ model Reminder {
   @@index([reminderDate])
   @@index([sent])
 }
+
+// PDFRequest model - stores PDF requests for lead tracking
+model PDFRequest {
+  id                String   @id @default(cuid())
+  
+  // User info
+  email             String
+  fullName          String?
+  
+  // Investment they requested PDF for
+  investmentName    String
+  investmentType    String?
+  
+  // Search parameters that led to this
+  amount            Int
+  timeHorizon       String
+  riskLevel         String
+  knowledgeLevel    String?
+  additionalNotes   String?  @db.Text
+  
+  // Metadata
+  pdfSent           Boolean  @default(false)
+  sentAt            DateTime?
+  createdAt         DateTime @default(now())
+  
+  @@map("pdf_requests")
+  @@index([email])
+  @@index([createdAt])
+  @@index([pdfSent])
+}

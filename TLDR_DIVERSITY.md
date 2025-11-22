@@ -72,3 +72,4 @@
 *להסבר מפורט: ראו `DIVERSITY_IMPROVEMENTS.md`*  
 *למדריך מהיר: ראו `QUICK_GUIDE_DIVERSITY.md`*
 
+

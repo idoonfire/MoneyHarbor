@@ -21,6 +21,8 @@ function saveSearchesToLocalStorage(recommendations: any[], preferences: UserPre
       amount: preferences.amount,
       timeHorizon: preferences.timeHorizon,
       riskLevel: preferences.riskLevel,
+      knowledgeLevel: preferences.knowledgeLevel,
+      additionalNotes: preferences.additionalNotes,
       recommendationsCount: 0, // How many investments user made from this batch (0-3)
       recommendations: recommendations.slice(0, 3), // Save FULL recommendation data
       status: 'לא ביצעתי', // "ביצעתי באחת" | "השקעה משולבת" | "לא ביצעתי"
@@ -29,6 +31,9 @@ function saveSearchesToLocalStorage(recommendations: any[], preferences: UserPre
     
     const combined = [newBatch, ...existingBatches];
     localStorage.setItem('moneyHarbor_batches', JSON.stringify(combined));
+    
+    // Also save latest preferences for PDF requests
+    localStorage.setItem('moneyHarbor_lastPreferences', JSON.stringify(preferences));
     
     console.log('✅ Search batch saved to My Harbor');
   } catch (error) {
@@ -212,12 +217,12 @@ export default function Home() {
           </div>
           
           <p className="text-2xl md:text-3xl mb-6 font-semibold leading-relaxed" style={{ color: '#b0b0b0' }}>
-            גלו איפה הכי כדאי לעגן את הכסף שלכם
+            גלו איפה הכי כדאי לעגון את הכסף שלכם
           </p>
           
           <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#8a8a8a' }}>
             ענו על כמה שאלות, וקבלו אפשרויות השקעה מותאמות אישית - 
-            עם פירוט מעשי, פלטפורמות, ועלויות
+            עם פירוט מעשי, פלטפורמות ועלויות
           </p>
           
           {/* CTA Button */}

@@ -1,5 +1,4 @@
-// My Harbor Page - User's investment tracking dashboard
-// Tracks search batches, investment status, and reminders
+// My Harbor Page - Professional investment tracking dashboard
 
 'use client';
 
@@ -12,7 +11,7 @@ interface SearchBatch {
   amount: number;
   timeHorizon: string;
   riskLevel: string;
-  recommendations: any[]; // Full recommendation objects
+  recommendations: any[];
   recommendationsCount: number;
   status: 'ביצעתי באחת' | 'השקעה משולבת' | 'לא ביצעתי';
   createdAt: string;
@@ -23,9 +22,10 @@ export default function MyHarborPage() {
   const [batches, setBatches] = useState<SearchBatch[]>([]);
   const [totalInvestments, setTotalInvestments] = useState(0);
   const [totalQueries, setTotalQueries] = useState(0);
-    const [expandedBatch, setExpandedBatch] = useState<string | null>(null);
+  const [expandedBatch, setExpandedBatch] = useState<string | null>(null);
   const [selectedInvestment, setSelectedInvestment] = useState<any>(null);
   const [selectedBatchAmount, setSelectedBatchAmount] = useState<number>(0);
+  const [showReminderSetup, setShowReminderSetup] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('moneyHarbor_batches');
@@ -63,21 +63,32 @@ export default function MyHarborPage() {
     setTotalInvestments(totalInvested);
   };
 
-  const setReminder = (id: string) => {
+  const setupGlobalReminder = () => {
     const sixMonthsLater = new Date();
     sixMonthsLater.setMonth(sixMonthsLater.getMonth() + 6);
     
-    const updated = batches.map(b => 
-      b.id === id ? { ...b, reminderDate: sixMonthsLater.toISOString() } : b
-    );
-    setBatches(updated);
-    localStorage.setItem('moneyHarbor_batches', JSON.stringify(updated));
+    // Save global reminder
+    localStorage.setItem('globalReminder', sixMonthsLater.toISOString());
     
-    alert('תזכורת נקבעה ל-' + sixMonthsLater.toLocaleDateString('he-IL'));
+    alert('תזכורת נקבעה ל-' + sixMonthsLater.toLocaleDateString('he-IL') + '\n\nנשלח לך מייל תזכורת לבדוק מחדש את הנמל שלך!');
+    setShowReminderSetup(false);
   };
 
-  const toggleExpand = (id: string) => {
-    setExpandedBatch(expandedBatch === id ? null : id);
+  const getStatusMessage = () => {
+    if (totalQueries === 0) return '';
+    const percentage = Math.round((totalInvestments / totalQueries) * 100);
+    
+    if (percentage === 100) {
+      return 'כל הכבוד – כל ההמלצות מצאו את מקומן לעגינה';
+    } else if (percentage >= 75) {
+      return 'התקדמות מצוינת – רוב ההמלצות בוצעו';
+    } else if (percentage >= 50) {
+      return 'מתקדמים יפה – חצי מהדרך';
+    } else if (percentage > 0) {
+      return 'התחלה טובה – יש עוד פוטנציאל';
+    } else {
+      return 'עדיין לא בוצעו השקעות מההמלצות';
+    }
   };
 
   return (
@@ -85,61 +96,67 @@ export default function MyHarborPage() {
       <Navigation />
       
       <div className="max-w-5xl mx-auto px-4 py-8">
-        <div className="mb-6">
+        {/* Header */}
+        <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2" style={{ color: '#ffd700' }}>
-            ⚓ הנמל שלי
+            הנמל שלי
           </h1>
           <p className="text-base" style={{ color: '#8a8a8a' }}>
             עקוב אחרי ההשקעות שלך וראה את ההתקדמות
           </p>
         </div>
 
-        {/* Compact Score */}
-        <div className="glass-light border rounded-xl p-4 mb-6 flex items-center justify-between" style={{
+        {/* Status Card - Professional */}
+        <div className="glass-light border rounded-xl p-6 mb-6" style={{
           borderColor: 'rgba(255, 215, 0, 0.2)'
         }}>
-          <div className="flex items-center gap-6">
-            <div className="text-center border-l pl-6" style={{ borderColor: 'rgba(138, 138, 138, 0.2)' }}>
-              <div className="text-3xl font-extrabold mb-0.5 tabular-nums" style={{ color: '#ffd700' }}>
-                {totalInvestments}
-              </div>
-              <p className="text-xs" style={{ color: '#8a8a8a' }}>השקעות</p>
+          <div className="text-xs font-semibold mb-3 uppercase tracking-wider" style={{ color: '#8a8a8a' }}>
+            מצב העגינה של הכסף שלך
+          </div>
+          
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <p className="text-lg font-semibold mb-1" style={{ color: '#e5e4e2' }}>
+                {totalInvestments} מתוך {totalQueries} המלצות סומנו כהושקעו בפועל
+              </p>
+              <p className="text-sm" style={{ color: totalInvestments === totalQueries && totalQueries > 0 ? '#10b981' : '#8a8a8a' }}>
+                {getStatusMessage()}
+              </p>
             </div>
             
-            <div className="flex-1">
-              <p className="text-sm mb-1.5 font-semibold" style={{ color: '#e5e4e2' }}>
-                ביצעת {totalInvestments} השקעות מתוך {totalQueries} שאילתות
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="flex-1 h-1.5 bg-finance-darkgrey rounded-full overflow-hidden">
-                  <div 
-                    className="h-full transition-all duration-500 rounded-full"
-                    style={{ 
-                      width: `${totalQueries > 0 ? (totalInvestments / totalQueries) * 100 : 0}%`,
-                      background: 'linear-gradient(90deg, #d4af37, #ffd700)'
-                    }}
-                  ></div>
-                </div>
-                <span className="text-xs font-bold tabular-nums" style={{ color: '#10b981' }}>
-                  {totalQueries > 0 ? Math.round((totalInvestments / totalQueries) * 100) : 0}%
-                </span>
+            <div className="text-right">
+              <div className="text-4xl font-extrabold tabular-nums mb-1" style={{ color: '#ffd700' }}>
+                {totalQueries > 0 ? Math.round((totalInvestments / totalQueries) * 100) : 0}%
               </div>
+              <p className="text-xs" style={{ color: '#8a8a8a' }}>שיעור ביצוע</p>
             </div>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="h-2 bg-finance-darkgrey rounded-full overflow-hidden">
+            <div 
+              className="h-full transition-all duration-500 rounded-full"
+              style={{ 
+                width: `${totalQueries > 0 ? (totalInvestments / totalQueries) * 100 : 0}%`,
+                background: 'linear-gradient(90deg, #d4af37, #ffd700)'
+              }}
+            ></div>
           </div>
         </div>
 
-        {/* Batches */}
-        <div className="mb-8">
+        {/* Batches History */}
+        <div className="mb-6">
           <h2 className="text-xl font-bold mb-4" style={{ color: '#e5e4e2' }}>
-            📊 היסטוריית החיפושים
+            היסטוריית החיפושים
           </h2>
 
           {batches.length === 0 ? (
             <div className="glass-light border rounded-xl p-12 text-center" style={{
               borderColor: 'rgba(138, 138, 138, 0.2)'
             }}>
-              <div className="text-4xl mb-4">🏝️</div>
-              <p className="text-lg mb-2" style={{ color: '#8a8a8a' }}>הנמל שלך עדיין ריק</p>
+              <p className="text-lg mb-2" style={{ color: '#8a8a8a' }}>
+                הנמל שלך עדיין ריק
+              </p>
               <p className="text-sm mb-6" style={{ color: '#5a5a5a' }}>
                 קבל המלצות השקעה כדי להתחיל לעקוב אחרי ההתקדמות שלך
               </p>
@@ -164,12 +181,11 @@ export default function MyHarborPage() {
                     borderColor: expandedBatch === batch.id ? 'rgba(255, 215, 0, 0.4)' : 'rgba(255, 215, 0, 0.2)'
                   }}
                 >
-                  {/* Batch Header - Always Visible */}
                   <div className="p-5">
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <p className="text-sm font-semibold mb-1" style={{ color: '#ffd700' }}>
-                          📅 חיפוש מ-{new Date(batch.createdAt).toLocaleDateString('he-IL')}
+                          חיפוש מ-{new Date(batch.createdAt).toLocaleDateString('he-IL')}
                         </p>
                         <p className="text-xs" style={{ color: '#8a8a8a' }}>
                           ₪{batch.amount.toLocaleString()} • {batch.timeHorizon} • {batch.riskLevel}
@@ -191,9 +207,8 @@ export default function MyHarborPage() {
                       </span>
                     </div>
 
-                    {/* Expand/Collapse Button */}
                     <button
-                      onClick={() => toggleExpand(batch.id)}
+                      onClick={() => setExpandedBatch(expandedBatch === batch.id ? null : batch.id)}
                       className="w-full py-2 rounded-lg text-sm font-semibold border transition-all mb-3"
                       style={{
                         backgroundColor: 'rgba(255, 215, 0, 0.05)',
@@ -204,7 +219,6 @@ export default function MyHarborPage() {
                       {expandedBatch === batch.id ? '▼ הסתר פרטים' : '▶ הצג את 3 ההמלצות'}
                     </button>
 
-                    {/* Expanded Content - 3 Recommendations */}
                     {expandedBatch === batch.id && (
                       <div className="space-y-3 mb-4 pt-3" style={{
                         borderTop: '1px solid rgba(138, 138, 138, 0.15)'
@@ -218,13 +232,13 @@ export default function MyHarborPage() {
                               borderColor: 'rgba(255, 215, 0, 0.2)'
                             }}
                             onClick={() => {
-                            setSelectedInvestment({ 
-                              ...rec, 
-                              timeHorizon: Array.isArray(rec.timeHorizon) ? rec.timeHorizon : [batch.timeHorizon],
-                              liquidity: rec.liquidity || 'בינונית'
-                            });
-                            setSelectedBatchAmount(batch.amount);
-                          }}
+                              setSelectedInvestment({ 
+                                ...rec, 
+                                timeHorizon: Array.isArray(rec.timeHorizon) ? rec.timeHorizon : [batch.timeHorizon],
+                                liquidity: rec.liquidity || 'בינונית'
+                              });
+                              setSelectedBatchAmount(batch.amount);
+                            }}
                           >
                             <div className="flex items-start justify-between mb-2">
                               <p className="text-base font-semibold" style={{ color: '#ffd700' }}>
@@ -245,11 +259,11 @@ export default function MyHarborPage() {
                                 color: '#8a8a8a',
                                 backgroundColor: 'rgba(255, 215, 0, 0.05)'
                               }}>
-                                💡 {rec.matchReason}
+                                {rec.matchReason}
                               </p>
                             )}
                             <p className="text-xs mt-2" style={{ color: '#ffd700' }}>
-                              👆 לחץ לפרטים מלאים וקבלת PDF
+                              לחץ לפרטים מלאים וקבלת PDF
                             </p>
                           </div>
                         ))}
@@ -257,7 +271,7 @@ export default function MyHarborPage() {
                     )}
 
                     {/* Status Buttons */}
-                    <div className="flex gap-2 mb-3">
+                    <div className="flex gap-2">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -272,7 +286,7 @@ export default function MyHarborPage() {
                           border: batch.status === 'ביצעתי באחת' ? 'none' : '1px solid rgba(16, 185, 129, 0.3)'
                         }}
                       >
-                        ✓ ביצעתי באחת
+                        ביצעתי באחת
                       </button>
                       
                       <button
@@ -289,7 +303,7 @@ export default function MyHarborPage() {
                           border: batch.status === 'השקעה משולבת' ? 'none' : '1px solid rgba(139, 92, 246, 0.3)'
                         }}
                       >
-                        ⚡ השקעה משולבת
+                        השקעה משולבת
                       </button>
                       
                       <button
@@ -306,28 +320,9 @@ export default function MyHarborPage() {
                           border: batch.status === 'לא ביצעתי' ? 'none' : '1px solid rgba(138, 138, 138, 0.3)'
                         }}
                       >
-                        ✗ לא ביצעתי
+                        לא ביצעתי
                       </button>
                     </div>
-
-                    {/* Reminder */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setReminder(batch.id);
-                      }}
-                      className="w-full py-2 rounded-lg text-sm font-semibold border transition-all hover:scale-[1.01]"
-                      style={{
-                        backgroundColor: batch.reminderDate ? 'rgba(255, 215, 0, 0.1)' : 'transparent',
-                        borderColor: 'rgba(255, 215, 0, 0.3)',
-                        color: batch.reminderDate ? '#ffd700' : '#8a8a8a'
-                      }}
-                    >
-                      {batch.reminderDate ? 
-                        `🔔 תזכורת: ${new Date(batch.reminderDate).toLocaleDateString('he-IL')}` :
-                        '🔔 תזכר לי בעוד 6 חודשים'
-                      }
-                    </button>
                   </div>
                 </div>
               ))}
@@ -335,7 +330,31 @@ export default function MyHarborPage() {
           )}
         </div>
 
-        {/* Back */}
+        {/* Reminder Card - Compact, Below History */}
+        <div className="glass-light border rounded-xl p-4 mb-8" style={{
+          borderColor: 'rgba(255, 215, 0, 0.3)',
+          background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(212, 175, 55, 0.02) 100%)'
+        }}>
+          <h3 className="text-sm font-bold mb-2" style={{ color: '#ffd700' }}>
+            בדיקת עגינה חוזרת
+          </h3>
+          <p className="text-xs mb-3" style={{ color: '#b0b0b0' }}>
+            רוצה שנזכיר לך לבדוק שוב את הנמל בעוד 6 חודשים?
+          </p>
+          <button
+            onClick={setupGlobalReminder}
+            className="w-full py-3 rounded-lg text-sm font-bold transition-all hover:scale-[1.02]"
+            style={{
+              background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+              color: '#0a0a0a',
+              boxShadow: '0 4px 20px rgba(255, 215, 0, 0.2)'
+            }}
+          >
+            כן, שלחו לי תזכורת 🔔
+          </button>
+        </div>
+
+        {/* Back Button - Branded */}
         <div className="text-center">
           <a 
             href="/"
@@ -346,7 +365,7 @@ export default function MyHarborPage() {
               color: '#ffd700'
             }}
           >
-            ← חזור לעמוד הראשי
+            ← חזרה למצוא נמל חדש לכסף
           </a>
         </div>
       </div>

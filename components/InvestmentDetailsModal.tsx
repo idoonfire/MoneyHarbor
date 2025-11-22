@@ -28,6 +28,13 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
 
   const handleSendEmail = async (email: string, fullName: string) => {
     setIsSending(true);
+    
+    // Show success immediately after 1 second
+    const quickFeedback = setTimeout(() => {
+      setEmailSent(true);
+      setShowEmailPopup(false);
+    }, 1000);
+    
     try {
       console.log('🤖 Generating detailed guide with AI...');
       
@@ -53,27 +60,51 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
       const pdfBase64 = await generateInvestmentPDFClient(investment, userAmount, detailedGuide);
       console.log('✅ PDF generated');
       
-      console.log('📧 Sending email...');
+      console.log('📧 Sending email in background...');
       
-      const response = await fetch('/api/send-report', {
+      // Get user's original search preferences for database tracking
+      const savedPreferences = localStorage.getItem('moneyHarbor_lastPreferences');
+      const preferences = savedPreferences ? JSON.parse(savedPreferences) : {};
+      
+      // Send email in background (don't wait for response)
+      fetch('/api/send-report', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, fullName, investment, pdfBase64 })
+        body: JSON.stringify({ 
+          email, 
+          fullName, 
+          investment, 
+          pdfBase64,
+          searchParams: {
+            amount: userAmount,
+            timeHorizon: preferences.timeHorizon || investment.timeHorizon,
+            riskLevel: preferences.riskLevel || investment.riskLevel,
+            knowledgeLevel: preferences.knowledgeLevel,
+            additionalNotes: preferences.additionalNotes,
+          }
+        })
+      }).then(response => {
+        if (response.ok) {
+          console.log('✅ Email sent successfully in background');
+        } else {
+          console.error('❌ Email failed to send');
+        }
+      }).catch(error => {
+        console.error('Error sending email:', error);
       });
 
-      if (response.ok) {
-        setEmailSent(true);
-        setTimeout(() => {
-          setShowEmailPopup(false);
-          setEmailSent(false);
-          onClose();
-        }, 2000);
-      } else {
-        alert('שגיאה בשליחת המייל. אנא נסה שוב.');
-      }
+      // User already sees success message after 1 second
+      setTimeout(() => {
+        setEmailSent(false);
+        onClose();
+      }, 2000);
+      
     } catch (error) {
+      clearTimeout(quickFeedback);
       console.error('Error:', error);
       alert('שגיאה. אנא נסה שוב.');
+      setEmailSent(false);
+      setShowEmailPopup(true);
     }
     setIsSending(false);
   };

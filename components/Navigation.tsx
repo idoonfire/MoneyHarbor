@@ -10,7 +10,7 @@ export default function Navigation() {
 
   const navItems = [
     { href: '/', label: 'דף הבית' },
-    { href: '/my-harbor', label: '⚓ הנמל שלי' },
+    { href: '/my-harbor', label: 'הנמל שלי' },
     { href: '/faq', label: 'שאלות' },
     { href: '/disclaimer', label: 'תנאים' },
   ];

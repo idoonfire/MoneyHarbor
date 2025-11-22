@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { prisma } from '@/lib/prisma';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, fullName, investment, pdfBase64 } = body;
+    const { email, fullName, investment, pdfBase64, searchParams } = body;
 
     console.log('📨 Received email request for:', email, 'Name:', fullName);
     console.log('📄 PDF Base64 length:', pdfBase64?.length || 0);
+    console.log('📊 Search params:', searchParams);
 
     if (!email || !investment || !pdfBase64) {
       console.error('❌ Missing fields:', { hasEmail: !!email, hasName: !!fullName, hasInvestment: !!investment, hasPDF: !!pdfBase64 });
@@ -113,6 +115,30 @@ export async function POST(request: NextRequest) {
     });
 
     console.log('✅ Email with PDF sent successfully:', data);
+
+    // Save PDF request to database for lead tracking
+    try {
+      const pdfRequest = await prisma.pDFRequest.create({
+        data: {
+          email: email,
+          fullName: fullName || null,
+          investmentName: investment.name || 'Unknown',
+          investmentType: investment.riskLevel || null,
+          amount: searchParams?.amount || investment.minAmount || 0,
+          timeHorizon: searchParams?.timeHorizon || 
+                      (Array.isArray(investment.timeHorizon) ? investment.timeHorizon.join(', ') : investment.timeHorizon) || '',
+          riskLevel: searchParams?.riskLevel || investment.riskLevel || '',
+          knowledgeLevel: searchParams?.knowledgeLevel || null,
+          additionalNotes: searchParams?.additionalNotes || null,
+          pdfSent: true,
+          sentAt: new Date(),
+        }
+      });
+      console.log('✅ PDF request saved to database:', pdfRequest.id);
+    } catch (dbError) {
+      console.error('⚠️ Error saving to database:', dbError);
+      // Don't fail the whole request if DB save fails - continue sending email
+    }
 
     return NextResponse.json({
       success: true,
