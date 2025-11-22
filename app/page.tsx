@@ -50,6 +50,27 @@ export default function Home() {
   const [selectedInvestment, setSelectedInvestment] = useState<ScoredInvestment | null>(null);
   const [userAmount, setUserAmount] = useState<number>(0);
 
+  // Reset search function
+  const resetSearch = () => {
+    setRecommendations(null);
+    setHasSearched(false);
+    setLoadingStep(0);
+    setShowComparison(false);
+    setSelectedInvestment(null);
+    setIsLoading(false);
+    
+    // Scroll to form
+    setTimeout(() => {
+      const formElement = document.getElementById('investment-form');
+      if (formElement) {
+        formElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 100);
+  };
+
   const handleFormSubmit = async (preferences: UserPreferences) => {
     setIsLoading(true);
     setHasSearched(true);
@@ -132,7 +153,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Navigation Bar */}
-      <Navigation />
+      <Navigation onLogoClick={resetSearch} />
 
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-finance-black via-finance-charcoal to-finance-black text-white py-20 md:py-32 px-4 overflow-hidden border-b-4 border-finance-gold">
@@ -229,20 +250,26 @@ export default function Home() {
           <div className="mt-12">
             <button
               onClick={() => {
-                setTimeout(() => {
-                  const formElement = document.getElementById('investment-form');
-                  if (formElement) {
-                    formElement.scrollIntoView({ 
-                      behavior: 'smooth',
-                      block: 'start'
-                    });
-                    // Small delay then focus on first input
-                    setTimeout(() => {
-                      const firstInput = formElement.querySelector('input, select, textarea') as HTMLElement;
-                      firstInput?.focus();
-                    }, 800);
-                  }
-                }, 100);
+                // Reset search if user already searched
+                if (hasSearched || recommendations) {
+                  resetSearch();
+                } else {
+                  // Normal scroll behavior for first time
+                  setTimeout(() => {
+                    const formElement = document.getElementById('investment-form');
+                    if (formElement) {
+                      formElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                      // Small delay then focus on first input
+                      setTimeout(() => {
+                        const firstInput = formElement.querySelector('input, select, textarea') as HTMLElement;
+                        firstInput?.focus();
+                      }, 800);
+                    }
+                  }, 100);
+                }
               }}
               className="px-10 py-5 rounded-xl text-xl font-extrabold transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95 inline-flex items-center gap-3"
               style={{

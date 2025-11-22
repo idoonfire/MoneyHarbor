@@ -5,7 +5,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function Navigation() {
+interface NavigationProps {
+  onLogoClick?: () => void;
+}
+
+export default function Navigation({ onLogoClick }: NavigationProps = {}) {
   const pathname = usePathname();
 
   const navItems = [
@@ -15,13 +19,22 @@ export default function Navigation() {
     { href: '/disclaimer', label: 'תנאים' },
   ];
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    // If we're on homepage and have onLogoClick callback, use it
+    if (pathname === '/' && onLogoClick) {
+      e.preventDefault();
+      onLogoClick();
+    }
+    // Otherwise let the Link handle navigation normally
+  };
+
   return (
     <nav className="glass-light border-b py-3 px-4 sticky top-0 z-50 shadow-xl" style={{ borderColor: 'rgba(138, 138, 138, 0.15)' }}>
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between gap-6">
           
           {/* Logo/Brand - Minimal */}
-          <Link href="/" className="flex items-center gap-2.5 group">
+          <Link href="/" className="flex items-center gap-2.5 group" onClick={handleLogoClick}>
             <div className="w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" style={{
               background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
               borderColor: 'rgba(255, 215, 0, 0.8)',
