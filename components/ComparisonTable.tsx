@@ -94,7 +94,7 @@ export default function ComparisonTable({ investments, onClose }: ComparisonTabl
         className="border rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-auto shadow-2xl"
         style={{ 
           backgroundColor: 'rgba(26, 26, 26, 0.98)',
-          borderColor: 'rgba(255, 215, 0, 0.4)',
+          borderColor: 'rgba(255, 149, 0, 0.4)',
           borderWidth: '2px'
         }}
         onClick={(e) => e.stopPropagation()}
@@ -102,16 +102,16 @@ export default function ComparisonTable({ investments, onClose }: ComparisonTabl
         {/* Header */}
         <div className="sticky top-0 border-b p-6 flex items-center justify-between z-10" style={{ 
           backgroundColor: 'rgba(26, 26, 26, 0.98)',
-          borderColor: 'rgba(255, 215, 0, 0.2)'
+          borderColor: 'rgba(255, 149, 0, 0.2)'
         }}>
-          <h2 className="text-2xl font-bold" style={{ color: '#ffd700' }}>
+          <h2 className="text-2xl font-bold" style={{ color: '#ff9500' }}>
             השוואה בין האפשרויות
           </h2>
           <button
             onClick={onClose}
             className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:rotate-90"
             style={{
-              background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+              background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
               color: '#0a0a0a',
               fontSize: '18px',
               fontWeight: 'bold'
@@ -125,12 +125,12 @@ export default function ComparisonTable({ investments, onClose }: ComparisonTabl
         <div className="p-6 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b" style={{ borderColor: 'rgba(255, 215, 0, 0.2)' }}>
-                <th className="text-right py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ffd700' }}>אפיק השקעה</th>
-                <th className="text-center py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ffd700' }}>סיכון</th>
-                <th className="text-center py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ffd700' }}>טווח זמן</th>
-                <th className="text-center py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ffd700' }}>נזילות</th>
-                <th className="text-center py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ffd700' }}>תשואה צפויה</th>
+              <tr className="border-b" style={{ borderColor: 'rgba(255, 149, 0, 0.2)' }}>
+                <th className="text-right py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ff9500' }}>אפיק השקעה</th>
+                <th className="text-center py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ff9500' }}>סיכון</th>
+                <th className="text-center py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ff9500' }}>טווח זמן</th>
+                <th className="text-center py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ff9500' }}>נזילות</th>
+                <th className="text-center py-4 px-4 font-bold uppercase tracking-wider text-xs" style={{ color: '#ff9500' }}>תשואה צפויה</th>
               </tr>
             </thead>
             <tbody>
@@ -142,7 +142,7 @@ export default function ComparisonTable({ investments, onClose }: ComparisonTabl
                 >
                   {/* Investment Name Only */}
                   <td className="py-5 px-4">
-                    <div className="font-bold text-base" style={{ color: '#ffd700' }}>
+                    <div className="font-bold text-base" style={{ color: '#ff9500' }}>
                       {inv.name}
                     </div>
                   </td>
@@ -179,7 +179,7 @@ export default function ComparisonTable({ investments, onClose }: ComparisonTabl
         </div>
 
         {/* Footer Note */}
-        <div className="p-6 pt-0 border-t" style={{ borderColor: 'rgba(255, 215, 0, 0.1)' }}>
+        <div className="p-6 pt-0 border-t" style={{ borderColor: 'rgba(255, 149, 0, 0.1)' }}>
           <p className="text-xs text-center" style={{ color: '#5a5a5a' }}>
             לחץ מחוץ לטבלה או על ✕ לסגירה
           </p>

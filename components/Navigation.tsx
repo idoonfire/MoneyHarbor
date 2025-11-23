@@ -36,8 +36,8 @@ export default function Navigation({ onLogoClick }: NavigationProps = {}) {
           {/* Logo/Brand - Minimal */}
           <Link href="/" className="flex items-center gap-2.5 group" onClick={handleLogoClick}>
             <div className="w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" style={{
-              background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
-              borderColor: 'rgba(255, 215, 0, 0.8)',
+              background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
+              borderColor: 'rgba(255, 149, 0, 0.8)',
               borderWidth: '2px'
             }}>
               {/* Minimal Anchor Icon */}
@@ -48,11 +48,11 @@ export default function Navigation({ onLogoClick }: NavigationProps = {}) {
                 <path d="M50 67 Q40 64, 32 71 L32 74 Q40 68, 50 70 Z" fill="#0a0a0a"/>
                 <path d="M50 67 Q60 64, 68 71 L68 74 Q60 68, 50 70 Z" fill="#0a0a0a"/>
                 <rect x="32" y="41" width="36" height="3" fill="#0a0a0a" rx="1.5"/>
-                <circle cx="32" cy="42.5" r="2" fill="#ffd700"/>
-                <circle cx="68" cy="42.5" r="2" fill="#ffd700"/>
+                <circle cx="32" cy="42.5" r="2" fill="#ff9500"/>
+                <circle cx="68" cy="42.5" r="2" fill="#ff9500"/>
               </svg>
             </div>
-            <span className="hidden md:block text-lg font-bold tracking-tight" style={{ color: '#ffd700', fontFamily: 'var(--font-ibm)' }}>
+            <span className="hidden md:block text-lg font-bold tracking-tight" style={{ color: '#ff9500', fontFamily: 'var(--font-ibm)' }}>
               MoneyHarbor
             </span>
           </Link>
@@ -69,14 +69,14 @@ export default function Navigation({ onLogoClick }: NavigationProps = {}) {
                     isActive ? '' : 'hover:opacity-70'
                   }`}
                   style={{
-                    color: isActive ? '#ffd700' : '#8a8a8a',
+                    color: isActive ? '#ff9500' : '#8a8a8a',
                     fontFamily: 'var(--font-assistant)',
                   }}
                 >
                   {item.label}
                   {isActive && (
                     <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full" style={{ 
-                      background: 'linear-gradient(90deg, transparent, #ffd700, transparent)' 
+                      background: 'linear-gradient(90deg, transparent, #ff9500, transparent)' 
                     }}></div>
                   )}
                 </Link>

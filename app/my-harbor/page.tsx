@@ -124,7 +124,7 @@ export default function MyHarborPage() {
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2" style={{ color: '#ffd700' }}>
+          <h1 className="text-4xl font-bold mb-2" style={{ color: '#ff9500' }}>
             הנמל שלי
           </h1>
           <p className="text-base" style={{ color: '#8a8a8a' }}>
@@ -134,7 +134,7 @@ export default function MyHarborPage() {
 
         {/* Status Card - Professional */}
         <div className="glass-light border rounded-xl p-6 mb-6" style={{
-          borderColor: 'rgba(255, 215, 0, 0.2)'
+          borderColor: 'rgba(255, 149, 0, 0.2)'
         }}>
           <div className="text-xs font-semibold mb-3 uppercase tracking-wider" style={{ color: '#8a8a8a' }}>
             מצב העגינה של הכסף שלך
@@ -151,7 +151,7 @@ export default function MyHarborPage() {
             </div>
             
             <div className="text-right">
-              <div className="text-4xl font-extrabold tabular-nums mb-1" style={{ color: '#ffd700' }}>
+              <div className="text-4xl font-extrabold tabular-nums mb-1" style={{ color: '#ff9500' }}>
                 {totalQueries > 0 ? Math.round((totalInvestments / totalQueries) * 100) : 0}%
               </div>
               <p className="text-xs" style={{ color: '#8a8a8a' }}>שיעור ביצוע</p>
@@ -164,7 +164,7 @@ export default function MyHarborPage() {
               className="h-full transition-all duration-500 rounded-full"
               style={{ 
                 width: `${totalQueries > 0 ? (totalInvestments / totalQueries) * 100 : 0}%`,
-                background: 'linear-gradient(90deg, #d4af37, #ffd700)'
+                background: 'linear-gradient(90deg, #ffb347, #ff9500)'
               }}
             ></div>
           </div>
@@ -190,7 +190,7 @@ export default function MyHarborPage() {
                 href="/"
                 className="inline-block px-6 py-3 rounded-lg font-bold transition-all hover:scale-105"
                 style={{
-                  background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+                  background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
                   color: '#0a0a0a'
                 }}
               >
@@ -204,13 +204,13 @@ export default function MyHarborPage() {
                   key={batch.id}
                   className="glass-light border rounded-xl overflow-hidden"
                   style={{
-                    borderColor: expandedBatch === batch.id ? 'rgba(255, 215, 0, 0.4)' : 'rgba(255, 215, 0, 0.2)'
+                    borderColor: expandedBatch === batch.id ? 'rgba(255, 149, 0, 0.4)' : 'rgba(255, 149, 0, 0.2)'
                   }}
                 >
                   <div className="p-5">
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <p className="text-sm font-semibold mb-1" style={{ color: '#ffd700' }}>
+                        <p className="text-sm font-semibold mb-1" style={{ color: '#ff9500' }}>
                           חיפוש מ-{new Date(batch.createdAt).toLocaleDateString('he-IL')}
                         </p>
                         <p className="text-xs" style={{ color: '#8a8a8a' }}>
@@ -237,9 +237,9 @@ export default function MyHarborPage() {
                       onClick={() => setExpandedBatch(expandedBatch === batch.id ? null : batch.id)}
                       className="w-full py-2 rounded-lg text-sm font-semibold border transition-all mb-3"
                       style={{
-                        backgroundColor: 'rgba(255, 215, 0, 0.05)',
-                        borderColor: 'rgba(255, 215, 0, 0.3)',
-                        color: '#ffd700'
+                        backgroundColor: 'rgba(255, 149, 0, 0.05)',
+                        borderColor: 'rgba(255, 149, 0, 0.3)',
+                        color: '#ff9500'
                       }}
                     >
                       {expandedBatch === batch.id ? '▼ הסתר פרטים' : '▶ הצג את 3 ההמלצות'}
@@ -254,8 +254,8 @@ export default function MyHarborPage() {
                             key={idx}
                             className="border rounded-lg p-4 hover:border-finance-gold/40 transition-all cursor-pointer"
                             style={{ 
-                              backgroundColor: 'rgba(255, 215, 0, 0.03)',
-                              borderColor: 'rgba(255, 215, 0, 0.2)'
+                              backgroundColor: 'rgba(255, 149, 0, 0.03)',
+                              borderColor: 'rgba(255, 149, 0, 0.2)'
                             }}
                             onClick={() => {
                               setSelectedInvestment({ 
@@ -267,12 +267,12 @@ export default function MyHarborPage() {
                             }}
                           >
                             <div className="flex items-start justify-between mb-2">
-                              <p className="text-base font-semibold" style={{ color: '#ffd700' }}>
+                              <p className="text-base font-semibold" style={{ color: '#ff9500' }}>
                                 {idx + 1}. {rec.name}
                               </p>
                               <span className="px-2 py-0.5 rounded-full text-xs" style={{
-                                backgroundColor: 'rgba(255, 215, 0, 0.2)',
-                                color: '#ffd700'
+                                backgroundColor: 'rgba(255, 149, 0, 0.2)',
+                                color: '#ff9500'
                               }}>
                                 {rec.riskLevel}
                               </span>
@@ -283,12 +283,12 @@ export default function MyHarborPage() {
                             {rec.matchReason && (
                               <p className="text-xs p-2 rounded" style={{ 
                                 color: '#8a8a8a',
-                                backgroundColor: 'rgba(255, 215, 0, 0.05)'
+                                backgroundColor: 'rgba(255, 149, 0, 0.05)'
                               }}>
                                 {rec.matchReason}
                               </p>
                             )}
-                            <p className="text-xs mt-2" style={{ color: '#ffd700' }}>
+                            <p className="text-xs mt-2" style={{ color: '#ff9500' }}>
                               לחץ לפרטים מלאים וקבלת PDF
                             </p>
                           </div>
@@ -358,10 +358,10 @@ export default function MyHarborPage() {
 
         {/* Reminder Card - Compact, Below History */}
         <div className="glass-light border rounded-xl p-4 mb-8" style={{
-          borderColor: 'rgba(255, 215, 0, 0.3)',
-          background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(212, 175, 55, 0.02) 100%)'
+          borderColor: 'rgba(255, 149, 0, 0.3)',
+          background: 'linear-gradient(135deg, rgba(255, 149, 0, 0.05) 0%, rgba(212, 175, 55, 0.02) 100%)'
         }}>
-          <h3 className="text-sm font-bold mb-2" style={{ color: '#ffd700' }}>
+          <h3 className="text-sm font-bold mb-2" style={{ color: '#ff9500' }}>
             בדיקת עגינה חוזרת
           </h3>
           <p className="text-xs mb-3" style={{ color: '#b0b0b0' }}>
@@ -371,9 +371,9 @@ export default function MyHarborPage() {
             onClick={() => setShowReminderPopup(true)}
             className="w-full py-3 rounded-lg text-sm font-bold transition-all hover:scale-[1.02]"
             style={{
-              background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+              background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
               color: '#0a0a0a',
-              boxShadow: '0 4px 20px rgba(255, 215, 0, 0.2)'
+              boxShadow: '0 4px 20px rgba(255, 149, 0, 0.2)'
             }}
           >
             כן, שלחו לי תזכורת 🔔
@@ -387,8 +387,8 @@ export default function MyHarborPage() {
             className="inline-block px-8 py-3 rounded-lg text-base font-semibold border transition-all hover:scale-105"
             style={{
               backgroundColor: 'transparent',
-              borderColor: 'rgba(255, 215, 0, 0.4)',
-              color: '#ffd700'
+              borderColor: 'rgba(255, 149, 0, 0.4)',
+              color: '#ff9500'
             }}
           >
             ← חזרה למצוא נמל חדש לכסף
@@ -415,12 +415,12 @@ export default function MyHarborPage() {
             className="border rounded-xl p-6 max-w-md w-full mx-4"
             style={{
               backgroundColor: '#1a1a1a',
-              borderColor: 'rgba(255, 215, 0, 0.5)',
+              borderColor: 'rgba(255, 149, 0, 0.5)',
               borderWidth: '2px'
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-xl font-bold mb-4" style={{ color: '#ffd700' }}>
+            <h3 className="text-xl font-bold mb-4" style={{ color: '#ff9500' }}>
               📧 תזכורת למייל
             </h3>
             
@@ -440,7 +440,7 @@ export default function MyHarborPage() {
                 className="w-full px-4 py-3 rounded-lg text-base border-2 transition-all focus:outline-none focus:ring-2"
                 style={{
                   backgroundColor: '#0a0a0a',
-                  borderColor: 'rgba(255, 215, 0, 0.3)',
+                  borderColor: 'rgba(255, 149, 0, 0.3)',
                   color: '#e5e4e2'
                 }}
                 disabled={sendingReminder}
@@ -465,7 +465,7 @@ export default function MyHarborPage() {
                 disabled={sendingReminder || !reminderEmail}
                 className="flex-1 py-3 rounded-lg font-semibold transition-all"
                 style={{
-                  background: sendingReminder ? '#555' : 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+                  background: sendingReminder ? '#555' : 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
                   color: '#0a0a0a',
                   opacity: sendingReminder || !reminderEmail ? 0.5 : 1,
                   cursor: sendingReminder || !reminderEmail ? 'not-allowed' : 'pointer'

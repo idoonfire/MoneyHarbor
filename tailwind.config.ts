@@ -32,8 +32,8 @@ const config: Config = {
           grey: '#3a3a3a',
           silver: '#8a8a8a',
           lightsilver: '#b0b0b0',
-          gold: '#d4af37',
-          brightgold: '#ffd700',
+          gold: '#ffb347',
+          brightgold: '#ff9500',
           platinum: '#e5e4e2',
         },
         success: {

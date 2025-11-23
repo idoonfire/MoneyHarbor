@@ -35,11 +35,11 @@ export async function generateInvestmentPDFClient(investment: any, userAmount: n
       <div style="width: 210mm; height: 297mm; background: white; padding: 0; margin: 0; position: relative; page-break-after: always; font-family: 'Times New Roman', Georgia, serif;">
         ${pageNumber === 1 ? `
         <!-- Header (only on first page) -->
-        <div style="background: #1a1a1a; padding: 20px 40px; border-bottom: 3px solid #d4af37;">
+        <div style="background: #1a1a1a; padding: 20px 40px; border-bottom: 3px solid #ffb347;">
           <div style="text-align: center;">
             <h1 style="font-size: 39px; font-weight: 300; color: #ffffff; margin: 0 0 8px 0; letter-spacing: 2px;">MoneyHarbor</h1>
-            <div style="width: 60px; height: 2px; background: #d4af37; margin: 0 auto 8px;"></div>
-            <p style="font-size: 15px; color: #d4af37; font-weight: 500; margin: 0; letter-spacing: 1px;">דוח מחקר השקעות</p>
+            <div style="width: 60px; height: 2px; background: #ffb347; margin: 0 auto 8px;"></div>
+            <p style="font-size: 15px; color: #ffb347; font-weight: 500; margin: 0; letter-spacing: 1px;">דוח מחקר השקעות</p>
           </div>
         </div>
         ` : `

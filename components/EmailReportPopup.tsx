@@ -36,12 +36,12 @@ export default function EmailReportPopup({ onSend, onClose, isLoading }: EmailRe
         className="border rounded-xl p-6 max-w-md w-full mx-4"
         style={{
           backgroundColor: '#1a1a1a',
-          borderColor: 'rgba(255, 215, 0, 0.5)',
+          borderColor: 'rgba(255, 149, 0, 0.5)',
           borderWidth: '2px'
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="text-xl font-bold mb-4" style={{ color: '#ffd700' }}>
+        <h3 className="text-xl font-bold mb-4" style={{ color: '#ff9500' }}>
           📧 שליחת דו&quot;ח למייל
         </h3>
         
@@ -58,7 +58,7 @@ export default function EmailReportPopup({ onSend, onClose, isLoading }: EmailRe
               className="w-full px-4 py-3 rounded-lg border text-base"
               style={{
                 backgroundColor: 'rgba(42, 42, 42, 0.8)',
-                borderColor: 'rgba(255, 215, 0, 0.3)',
+                borderColor: 'rgba(255, 149, 0, 0.3)',
                 color: '#e5e4e2'
               }}
               required
@@ -79,7 +79,7 @@ export default function EmailReportPopup({ onSend, onClose, isLoading }: EmailRe
               className="w-full px-4 py-3 rounded-lg border text-base"
               style={{
                 backgroundColor: 'rgba(42, 42, 42, 0.8)',
-                borderColor: 'rgba(255, 215, 0, 0.3)',
+                borderColor: 'rgba(255, 149, 0, 0.3)',
                 color: '#e5e4e2'
               }}
               required
@@ -104,7 +104,7 @@ export default function EmailReportPopup({ onSend, onClose, isLoading }: EmailRe
               disabled={isLoading}
               className="flex-1 py-3 rounded-lg text-base font-bold transition-all disabled:opacity-50"
               style={{
-                background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+                background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
                 color: '#0a0a0a'
               }}
             >

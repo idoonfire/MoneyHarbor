@@ -58,9 +58,9 @@ export default function InvestmentCard({ investment, onShowDetails }: Investment
             {investment.riskLevel}
           </span>
           <span className="px-2.5 py-1 rounded-full font-medium" style={{
-            backgroundColor: 'rgba(255, 215, 0, 0.1)',
-            color: '#ffd700',
-            border: '1px solid rgba(255, 215, 0, 0.2)'
+            backgroundColor: 'rgba(255, 149, 0, 0.1)',
+            color: '#ff9500',
+            border: '1px solid rgba(255, 149, 0, 0.2)'
           }}>
             {investment.timeHorizon?.[0] || investment.timeHorizon || 'בינוני'}
           </span>
@@ -92,7 +92,7 @@ export default function InvestmentCard({ investment, onShowDetails }: Investment
           <div 
             className="w-full text-center py-2.5 rounded-lg text-sm font-bold transition-all"
             style={{
-              background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+              background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
               color: '#0a0a0a'
             }}
           >

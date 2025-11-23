@@ -13,14 +13,14 @@ export default function FAQPage() {
       <div className="bg-gradient-to-br from-finance-black to-finance-charcoal text-white py-12 px-4 border-b" style={{ borderColor: 'rgba(212, 175, 55, 0.2)' }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-block px-4 py-1.5 rounded-full mb-4 text-xs font-semibold uppercase tracking-wider" style={{
-            backgroundColor: 'rgba(255, 215, 0, 0.1)',
-            color: '#ffd700',
-            border: '1px solid rgba(255, 215, 0, 0.3)'
+            backgroundColor: 'rgba(255, 149, 0, 0.1)',
+            color: '#ff9500',
+            border: '1px solid rgba(255, 149, 0, 0.3)'
           }}>
             מידע חשוב
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight" style={{ color: '#ffd700' }}>
+          <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight" style={{ color: '#ff9500' }}>
             שאלות ותשובות
           </h1>
           

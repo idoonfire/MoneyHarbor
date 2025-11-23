@@ -135,7 +135,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
           <div 
             className="absolute top-6 right-0 h-1 rounded-full transition-all duration-300"
             style={{ 
-              backgroundColor: '#ffd700',
+              backgroundColor: '#ff9500',
               width: `${((currentStep - 1) / 2) * 100}%`
             }}
           ></div>
@@ -149,15 +149,15 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                     step === currentStep ? 'scale-110' : ''
                   }`}
                   style={{
-                    backgroundColor: step <= currentStep ? '#ffd700' : 'rgba(42, 42, 42, 0.5)',
+                    backgroundColor: step <= currentStep ? '#ff9500' : 'rgba(42, 42, 42, 0.5)',
                     color: step <= currentStep ? '#0a0a0a' : '#5a5a5a',
-                    border: step === currentStep ? '3px solid #ffd700' : 'none',
-                    boxShadow: step === currentStep ? '0 0 20px rgba(255, 215, 0, 0.5)' : 'none'
+                    border: step === currentStep ? '3px solid #ff9500' : 'none',
+                    boxShadow: step === currentStep ? '0 0 20px rgba(255, 149, 0, 0.5)' : 'none'
                   }}
                 >
                   {step}
                 </div>
-                <span className="text-xs mt-2 text-center" style={{ color: step <= currentStep ? '#ffd700' : '#5a5a5a' }}>
+                <span className="text-xs mt-2 text-center" style={{ color: step <= currentStep ? '#ff9500' : '#5a5a5a' }}>
                   {step === 1 && 'סכום וזמן'}
                   {step === 2 && 'סיכון ופרופיל'}
                   {step === 3 && 'סיכום ומיקוד'}
@@ -191,7 +191,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                   סכום ההשקעה
                 </label>
                 {!isLargeInvestment && (
-                  <div className="text-3xl font-bold tabular-nums" style={{ color: '#ffd700' }}>
+                  <div className="text-3xl font-bold tabular-nums" style={{ color: '#ff9500' }}>
                     {formatCurrency(amount)}
                   </div>
                 )}
@@ -202,7 +202,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                   <div 
                     className="relative w-full rounded-full"
                     style={{ 
-                      background: `linear-gradient(to left, #ffd700 0%, #ffd700 ${((amount - 1000) / (500000 - 1000)) * 100}%, #2a2a2a ${((amount - 1000) / (500000 - 1000)) * 100}%, #2a2a2a 100%)`,
+                      background: `linear-gradient(to left, #ff9500 0%, #ff9500 ${((amount - 1000) / (500000 - 1000)) * 100}%, #2a2a2a ${((amount - 1000) / (500000 - 1000)) * 100}%, #2a2a2a 100%)`,
                       height: '8px'
                     }}
                   >
@@ -239,7 +239,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                   style={{
                     backgroundColor: 'rgba(26, 26, 26, 0.8)',
                     borderColor: 'rgba(212, 175, 55, 0.4)',
-                    color: '#ffd700'
+                    color: '#ff9500'
                   }}
                 />
               )}
@@ -264,14 +264,14 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                 <label className="text-base font-semibold uppercase tracking-wider" style={{ color: '#b0b0b0' }}>
                   טווח זמן להשקעה
                 </label>
-                <div className="text-2xl font-bold" style={{ color: '#ffd700' }}>
+                <div className="text-2xl font-bold" style={{ color: '#ff9500' }}>
                   {timeHorizonLabels[timeHorizon]}
                 </div>
               </div>
               <div 
                 className="relative w-full rounded-full"
                 style={{ 
-                  background: `linear-gradient(to left, #ffd700 0%, #ffd700 ${(timeHorizon / 6) * 100}%, #2a2a2a ${(timeHorizon / 6) * 100}%, #2a2a2a 100%)`,
+                  background: `linear-gradient(to left, #ff9500 0%, #ff9500 ${(timeHorizon / 6) * 100}%, #2a2a2a ${(timeHorizon / 6) * 100}%, #2a2a2a 100%)`,
                   height: '8px'
                 }}
               >
@@ -319,7 +319,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                   <span className="text-sm font-medium" style={{ color: getRiskColor(riskScore).bg }}>
                     {getRiskColor(riskScore).text}
                   </span>
-                  <div className="text-3xl font-bold tabular-nums" style={{ color: '#ffd700' }}>
+                  <div className="text-3xl font-bold tabular-nums" style={{ color: '#ff9500' }}>
                     {riskScore}
                   </div>
                 </div>
@@ -362,14 +362,14 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                 <label className="text-base font-semibold uppercase tracking-wider" style={{ color: '#b0b0b0' }}>
                   גיל
                 </label>
-                <div className="text-2xl font-bold tabular-nums" style={{ color: '#ffd700' }}>
+                <div className="text-2xl font-bold tabular-nums" style={{ color: '#ff9500' }}>
                   {age}
                 </div>
               </div>
               <div 
                 className="relative w-full rounded-full"
                 style={{ 
-                  background: `linear-gradient(to left, #ffd700 0%, #ffd700 ${((age - 18) / (80 - 18)) * 100}%, #2a2a2a ${((age - 18) / (80 - 18)) * 100}%, #2a2a2a 100%)`,
+                  background: `linear-gradient(to left, #ff9500 0%, #ff9500 ${((age - 18) / (80 - 18)) * 100}%, #2a2a2a ${((age - 18) / (80 - 18)) * 100}%, #2a2a2a 100%)`,
                   height: '8px'
                 }}
               >
@@ -405,7 +405,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
             {/* Knowledge Level - Required */}
             <div>
               <label className="text-base font-semibold uppercase tracking-wider mb-3 block" style={{ color: '#b0b0b0' }}>
-                רמת ידע <span className="text-sm normal-case" style={{ color: '#ffd700' }}>*</span>
+                רמת ידע <span className="text-sm normal-case" style={{ color: '#ff9500' }}>*</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {['מתחיל', 'בינוני', 'מתקדם'].map((level) => (
@@ -415,11 +415,11 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                     onClick={() => setKnowledgeLevel(level)}
                     className="py-3 px-4 rounded-lg text-base font-medium transition-all"
                     style={{
-                      backgroundColor: knowledgeLevel === level ? 'rgba(255, 215, 0, 0.15)' : 'transparent',
+                      backgroundColor: knowledgeLevel === level ? 'rgba(255, 149, 0, 0.15)' : 'transparent',
                       borderWidth: '1px',
                       borderStyle: 'solid',
-                      borderColor: knowledgeLevel === level ? '#ffd700' : 'rgba(138, 138, 138, 0.2)',
-                      color: knowledgeLevel === level ? '#ffd700' : '#8a8a8a'
+                      borderColor: knowledgeLevel === level ? '#ff9500' : 'rgba(138, 138, 138, 0.2)',
+                      color: knowledgeLevel === level ? '#ff9500' : '#8a8a8a'
                     }}
                   >
                     {level}
@@ -431,7 +431,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
             {/* AI Agent Prompt - Required */}
             <div>
               <label className="text-base font-semibold uppercase tracking-wider mb-3 block" style={{ color: '#b0b0b0' }}>
-                💬 ספר למערכת שלנו <span className="text-sm normal-case" style={{ color: '#ffd700' }}>*</span>
+                💬 ספר למערכת שלנו <span className="text-sm normal-case" style={{ color: '#ff9500' }}>*</span>
               </label>
               <textarea
                 value={additionalNotes}
@@ -443,13 +443,13 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                 className="w-full px-4 py-3 rounded-lg text-base border resize-none transition-all focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 style={{
                   backgroundColor: 'rgba(26, 26, 26, 0.5)',
-                  borderColor: additionalNotes.length >= 15 ? 'rgba(16, 185, 129, 0.5)' : 'rgba(255, 215, 0, 0.3)',
+                  borderColor: additionalNotes.length >= 15 ? 'rgba(16, 185, 129, 0.5)' : 'rgba(255, 149, 0, 0.3)',
                   borderWidth: '2px',
                   color: '#e5e4e2'
                 }}
               />
               <div className="flex justify-between mt-2">
-                <p className="text-xs" style={{ color: additionalNotes.length >= 15 ? '#10b981' : '#ffd700' }}>
+                <p className="text-xs" style={{ color: additionalNotes.length >= 15 ? '#10b981' : '#ff9500' }}>
                   🤖 {additionalNotes.length >= 15 ? 'מעולה! המערכת מבינה בדיוק מה אתה צריך' : 'ספר עוד כמה מילים כדי שהמערכת תבין טוב יותר'}
                 </p>
                 <span className="text-xs" style={{ color: additionalNotes.length >= 15 ? '#10b981' : '#5a5a5a' }}>
@@ -487,7 +487,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
               onClick={handleNext}
               className="flex-1 py-3.5 rounded-lg text-base font-bold transition-all"
               style={{
-                background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+                background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
                 color: '#0a0a0a',
                 letterSpacing: '0.02em'
               }}
@@ -512,7 +512,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
               disabled={isLoading || !canSubmit()}
               className="flex-1 py-3.5 rounded-lg text-base font-bold transition-all disabled:opacity-50"
               style={{
-                background: canSubmit() ? 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)' : 'linear-gradient(135deg, #6c757d 0%, #495057 100%)',
+                background: canSubmit() ? 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)' : 'linear-gradient(135deg, #6c757d 0%, #495057 100%)',
                 color: '#0a0a0a',
                 letterSpacing: '0.02em'
               }}

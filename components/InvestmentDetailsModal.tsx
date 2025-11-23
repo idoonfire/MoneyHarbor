@@ -122,7 +122,7 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
         className="border rounded-2xl w-full max-w-3xl shadow-2xl"
         style={{ 
           backgroundColor: 'rgba(26, 26, 26, 0.98)',
-          borderColor: 'rgba(255, 215, 0, 0.4)',
+          borderColor: 'rgba(255, 149, 0, 0.4)',
           borderWidth: '2px'
         }}
         onClick={(e) => e.stopPropagation()}
@@ -132,7 +132,7 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
             onClick={onClose}
           className="absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:rotate-90"
             style={{
-              background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+              background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
               color: '#0a0a0a',
               fontSize: '18px',
               fontWeight: 'bold'
@@ -145,7 +145,7 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
         <div className="p-8 text-center">
           {/* Investment Name */}
           <div className="mb-6">
-            <h2 className="text-3xl font-bold mb-2" style={{ color: '#ffd700' }}>
+            <h2 className="text-3xl font-bold mb-2" style={{ color: '#ff9500' }}>
               {investment.name}
             </h2>
             <span className="px-4 py-1.5 rounded-full text-sm font-bold inline-block" style={{
@@ -164,31 +164,31 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
           {/* Quick Stats - 3 Cards */}
           <div className="grid grid-cols-3 gap-4 mb-8">
             <div className="border rounded-lg p-4" style={{ 
-              backgroundColor: 'rgba(255, 215, 0, 0.05)',
-              borderColor: 'rgba(255, 215, 0, 0.3)'
+              backgroundColor: 'rgba(255, 149, 0, 0.05)',
+              borderColor: 'rgba(255, 149, 0, 0.3)'
             }}>
               <div className="text-xs mb-1" style={{ color: '#8a8a8a' }}>טווח זמן</div>
-              <div className="font-bold text-base" style={{ color: '#ffd700' }}>
+              <div className="font-bold text-base" style={{ color: '#ff9500' }}>
                 {Array.isArray(investment.timeHorizon) ? investment.timeHorizon.join(', ') : investment.timeHorizon}
               </div>
             </div>
 
             <div className="border rounded-lg p-4" style={{ 
-              backgroundColor: 'rgba(255, 215, 0, 0.05)',
-              borderColor: 'rgba(255, 215, 0, 0.3)'
+              backgroundColor: 'rgba(255, 149, 0, 0.05)',
+              borderColor: 'rgba(255, 149, 0, 0.3)'
             }}>
               <div className="text-xs mb-1" style={{ color: '#8a8a8a' }}>נזילות</div>
-              <div className="font-bold text-base" style={{ color: '#ffd700' }}>
+              <div className="font-bold text-base" style={{ color: '#ff9500' }}>
                 {investment.liquidity || 'בינונית'}
               </div>
             </div>
 
             <div className="border rounded-lg p-4" style={{ 
-              backgroundColor: 'rgba(255, 215, 0, 0.05)',
-              borderColor: 'rgba(255, 215, 0, 0.3)'
+              backgroundColor: 'rgba(255, 149, 0, 0.05)',
+              borderColor: 'rgba(255, 149, 0, 0.3)'
             }}>
               <div className="text-xs mb-1" style={{ color: '#8a8a8a' }}>מינימום</div>
-              <div className="font-bold text-base" style={{ color: '#ffd700' }}>
+              <div className="font-bold text-base" style={{ color: '#ff9500' }}>
                 {investment.minAmount ? `₪${Number(investment.minAmount).toLocaleString()}` : 'ללא'}
               </div>
             </div>
@@ -196,7 +196,7 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
 
           {/* Main CTA */}
             <div className="space-y-4">
-            <div className="border-t border-b py-6" style={{ borderColor: 'rgba(255, 215, 0, 0.2)' }}>
+            <div className="border-t border-b py-6" style={{ borderColor: 'rgba(255, 149, 0, 0.2)' }}>
               <p className="text-sm mb-3" style={{ color: '#8a8a8a' }}>
                 רוצה לקבל דוח מפורט עם כל המידע, המלצות ומדריך מעשי?
               </p>
@@ -204,9 +204,9 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
             onClick={() => setShowEmailPopup(true)}
                 className="w-full py-4 rounded-xl text-lg font-extrabold transition-all hover:scale-105"
             style={{
-              background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+              background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
               color: '#0a0a0a',
-                  boxShadow: '0 10px 30px rgba(255, 215, 0, 0.3)'
+                  boxShadow: '0 10px 30px rgba(255, 149, 0, 0.3)'
             }}
           >
                 📄 קבל דו״ח מקצועי למייל
@@ -219,10 +219,10 @@ export default function InvestmentDetailsModal({ investment, userAmount, onClose
             {/* Match Reason if exists */}
             {investment.matchReason && (
               <div className="border rounded-lg p-4 text-right" style={{ 
-                backgroundColor: 'rgba(255, 215, 0, 0.05)',
-                borderColor: 'rgba(255, 215, 0, 0.2)'
+                backgroundColor: 'rgba(255, 149, 0, 0.05)',
+                borderColor: 'rgba(255, 149, 0, 0.2)'
               }}>
-                <div className="text-xs font-bold mb-2" style={{ color: '#ffd700' }}>💡 למה זה מתאים לך?</div>
+                <div className="text-xs font-bold mb-2" style={{ color: '#ff9500' }}>💡 למה זה מתאים לך?</div>
                 <p className="text-sm" style={{ color: '#b0b0b0' }}>
                   {investment.matchReason}
                 </p>

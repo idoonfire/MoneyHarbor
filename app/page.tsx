@@ -163,7 +163,7 @@ export default function Home() {
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #d4af37 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #ffb347 1px, transparent 0)',
             backgroundSize: '50px 50px'
           }}></div>
         </div>
@@ -175,9 +175,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center relative z-10">
           {/* Minimal Badge */}
           <div className="inline-block px-4 py-1.5 rounded-full mb-8 text-xs font-semibold uppercase tracking-wider" style={{
-            backgroundColor: 'rgba(255, 215, 0, 0.1)',
-            color: '#ffd700',
-            border: '1px solid rgba(255, 215, 0, 0.3)'
+            backgroundColor: 'rgba(255, 149, 0, 0.1)',
+            color: '#ff9500',
+            border: '1px solid rgba(255, 149, 0, 0.3)'
           }}>
             כלי חינוכי – לא ייעוץ השקעות
           </div>
@@ -187,15 +187,15 @@ export default function Home() {
             <div className="relative group cursor-pointer">
               {/* Glow effect */}
               <div className="absolute inset-0 rounded-full animate-pulse" style={{
-                background: 'radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(255, 149, 0, 0.4) 0%, transparent 70%)',
                 filter: 'blur(20px)'
               }}></div>
               
               {/* Main logo */}
               <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 flex items-center justify-center rounded-full border-4 shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" style={{
-                background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
-                borderColor: '#ffd700',
-                boxShadow: '0 0 60px rgba(255, 215, 0, 0.4)'
+                background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
+                borderColor: '#ff9500',
+                boxShadow: '0 0 60px rgba(255, 149, 0, 0.4)'
               }}>
                 <div className="w-[85%] h-[85%] bg-white rounded-full flex items-center justify-center">
                   {/* Beautiful Anchor SVG */}
@@ -215,27 +215,27 @@ export default function Home() {
                     <rect x="25" y="43" width="50" height="5" fill="#0a0a0a" rx="2"/>
                     
                     {/* Decorative details */}
-                    <circle cx="25" cy="45.5" r="3" fill="#ffd700"/>
-                    <circle cx="75" cy="45.5" r="3" fill="#ffd700"/>
+                    <circle cx="25" cy="45.5" r="3" fill="#ff9500"/>
+                    <circle cx="75" cy="45.5" r="3" fill="#ff9500"/>
                   </svg>
                 </div>
               </div>
               
               {/* Floating particles */}
               <div className="absolute -top-2 -right-2 w-3 h-3 rounded-full animate-bounce" style={{ 
-                background: '#ffd700',
+                background: '#ff9500',
                 animationDelay: '0s',
                 animationDuration: '2s'
               }}></div>
               <div className="absolute -bottom-2 -left-2 w-2 h-2 rounded-full animate-bounce" style={{ 
-                background: '#d4af37',
+                background: '#ffb347',
                 animationDelay: '0.5s',
                 animationDuration: '2.5s'
               }}></div>
             </div>
             
             {/* Title */}
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight drop-shadow-2xl text-center" style={{ color: '#ffd700' }}>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight drop-shadow-2xl text-center" style={{ color: '#ff9500' }}>
               MoneyHarbor
             </h1>
           </div>
@@ -276,9 +276,9 @@ export default function Home() {
               }}
               className="px-10 py-5 rounded-xl text-xl font-extrabold transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95 inline-flex items-center gap-3"
               style={{
-                background: 'linear-gradient(135deg, #ffd700 0%, #d4af37 100%)',
+                background: 'linear-gradient(135deg, #ff9500 0%, #ffb347 100%)',
                 color: '#0a0a0a',
-                boxShadow: '0 10px 40px rgba(255, 215, 0, 0.3)'
+                boxShadow: '0 10px 40px rgba(255, 149, 0, 0.3)'
               }}
             >
               <span>מתחילים – בואו נמצא נמל לכסף שלכם</span>
@@ -310,10 +310,10 @@ export default function Home() {
             {/* Status Header */}
             <div className="text-center mb-8">
               <div className="relative inline-block mb-4">
-                <div className="w-16 h-16 border-3 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#ffd700', borderWidth: '3px' }}></div>
+                <div className="w-16 h-16 border-3 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#ff9500', borderWidth: '3px' }}></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-8 h-8 rounded-full animate-pulse" style={{ 
-                    background: 'radial-gradient(circle, #ffd700 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, #ff9500 0%, transparent 70%)',
                     opacity: 0.4
                   }}></div>
                 </div>
@@ -321,8 +321,8 @@ export default function Home() {
 
               {/* Progress Percentage with smooth animation */}
               <div className="text-6xl font-extrabold mb-6 tabular-nums transition-all duration-500" style={{ 
-                color: '#ffd700',
-                textShadow: '0 0 30px rgba(255, 215, 0, 0.5)',
+                color: '#ff9500',
+                textShadow: '0 0 30px rgba(255, 149, 0, 0.5)',
                 transform: `scale(${1 + (loadingStep * 0.02)})`
               }}>
                 {Math.round((loadingStep / 4) * 100)}%
@@ -335,8 +335,8 @@ export default function Home() {
                     className="h-full transition-all duration-500 rounded-full relative overflow-hidden"
                     style={{ 
                       width: `${(loadingStep / 4) * 100}%`,
-                      background: 'linear-gradient(90deg, #d4af37, #ffd700)',
-                      boxShadow: '0 0 20px rgba(255, 215, 0, 0.5)'
+                      background: 'linear-gradient(90deg, #ffb347, #ff9500)',
+                      boxShadow: '0 0 20px rgba(255, 149, 0, 0.5)'
                     }}
                   >
                     {/* Shimmer effect */}
@@ -363,7 +363,7 @@ export default function Home() {
               </div>
               
               <div className="flex items-center justify-center gap-2">
-                <p className="text-sm font-semibold" style={{ color: '#ffd700' }}>
+                <p className="text-sm font-semibold" style={{ color: '#ff9500' }}>
                   {loadingStep < 3 ? `שלב ${loadingStep + 1} מתוך 4` : 'כמעט מוכן'}
                 </p>
                 <span className="text-sm animate-pulse" style={{ color: '#8a8a8a' }}>
@@ -389,7 +389,7 @@ export default function Home() {
                     backgroundColor: 'rgba(26, 26, 26, 0.3)'
                   }}>
                     <div className="h-5 rounded mb-3" style={{ 
-                      backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                      backgroundColor: 'rgba(255, 149, 0, 0.1)',
                       width: '80%'
                     }}></div>
                     <div className="flex gap-2">
@@ -420,7 +420,7 @@ export default function Home() {
               </h2>
               <p className="text-sm max-w-2xl mx-auto leading-relaxed mb-4" style={{ color: '#8a8a8a' }}>
                 הצעות אלו מבוססות על הפרמטרים שהזנתם. זה כלי חינוכי בלבד ולא ייעוץ אישי. 
-                <a href="/disclaimer" className="underline" style={{ color: '#ffd700' }}>קרא עוד</a>
+                <a href="/disclaimer" className="underline" style={{ color: '#ff9500' }}>קרא עוד</a>
               </p>
               
               {/* Comparison Button - Enlarged */}
@@ -428,10 +428,10 @@ export default function Home() {
                 onClick={() => setShowComparison(true)}
                 className="px-10 py-4 rounded-xl text-lg font-extrabold border-2 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(212, 175, 55, 0.1) 100%)',
-                  borderColor: 'rgba(255, 215, 0, 0.6)',
-                  color: '#ffd700',
-                  boxShadow: '0 4px 20px rgba(255, 215, 0, 0.2)'
+                  background: 'linear-gradient(135deg, rgba(255, 149, 0, 0.15) 0%, rgba(212, 175, 55, 0.1) 100%)',
+                  borderColor: 'rgba(255, 149, 0, 0.6)',
+                  color: '#ff9500',
+                  boxShadow: '0 4px 20px rgba(255, 149, 0, 0.2)'
                 }}
               >
                 📊 השווה את האפשרויות
@@ -465,7 +465,7 @@ export default function Home() {
         {/* Simple Footer */}
         <div className="text-center py-8">
           <p className="text-sm" style={{ color: '#8a8a8a' }}>
-            © 2025 MoneyHarbor | <span style={{ color: '#ffd700' }}>נמל הכסף – כלי חינוכי להשקעות פסיביות למשקיעים בישראל</span>
+            © 2025 MoneyHarbor | <span style={{ color: '#ff9500' }}>נמל הכסף – כלי חינוכי להשקעות פסיביות למשקיעים בישראל</span>
           </p>
         </div>
       </div>
@@ -503,13 +503,13 @@ export default function Home() {
             className="border rounded-xl p-4 shadow-2xl flex items-start gap-3 max-w-md"
             style={{
               backgroundColor: '#1a1a1a',
-              borderColor: 'rgba(255, 215, 0, 0.6)',
+              borderColor: 'rgba(255, 149, 0, 0.6)',
               borderWidth: '2px'
             }}
           >
             <div className="text-2xl">⚓</div>
             <div className="flex-1">
-              <p className="text-sm font-semibold mb-1" style={{ color: '#ffd700' }}>
+              <p className="text-sm font-semibold mb-1" style={{ color: '#ff9500' }}>
                 נשמר בהנמל שלך!
               </p>
               <p className="text-xs" style={{ color: '#b0b0b0' }}>

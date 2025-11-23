@@ -16,7 +16,7 @@ function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
     <div className={`border rounded-lg mb-3 overflow-hidden transition-all ${
       isOpen ? 'shadow-md' : 'shadow-sm'
     }`} style={{
-      borderColor: isOpen ? '#ffd700' : 'rgba(138, 138, 138, 0.2)',
+      borderColor: isOpen ? '#ff9500' : 'rgba(138, 138, 138, 0.2)',
       backgroundColor: 'rgba(26, 26, 26, 0.5)'
     }}>
       <button
@@ -29,7 +29,7 @@ function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
         <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all text-xs font-bold ${
           isOpen ? 'rotate-180' : ''
         }`} style={{
-          backgroundColor: isOpen ? '#ffd700' : 'rgba(138, 138, 138, 0.2)',
+          backgroundColor: isOpen ? '#ff9500' : 'rgba(138, 138, 138, 0.2)',
           color: isOpen ? '#0a0a0a' : '#8a8a8a'
         }}>
           ↓
@@ -100,11 +100,11 @@ export default function FAQ() {
 
       {/* Bottom Note */}
       <div className="mt-8 p-4 rounded-lg text-center" style={{ 
-        backgroundColor: 'rgba(255, 215, 0, 0.05)',
-        border: '1px solid rgba(255, 215, 0, 0.2)'
+        backgroundColor: 'rgba(255, 149, 0, 0.05)',
+        border: '1px solid rgba(255, 149, 0, 0.2)'
       }}>
         <p className="text-sm leading-relaxed" style={{ color: '#b0b0b0' }}>
-          יש שאלה נוספת? <a href="/disclaimer" className="underline font-semibold" style={{ color: '#ffd700' }}>קרא את הצהרת האחריות המלאה</a>
+          יש שאלה נוספת? <a href="/disclaimer" className="underline font-semibold" style={{ color: '#ff9500' }}>קרא את הצהרת האחריות המלאה</a>
         </p>
       </div>
     </div>

@@ -11,14 +11,14 @@ export default function DisclaimerPage() {
       <div className="bg-gradient-to-br from-finance-black to-finance-charcoal text-white py-12 px-4 border-b" style={{ borderColor: 'rgba(212, 175, 55, 0.2)' }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-block px-4 py-1.5 rounded-full mb-4 text-xs font-semibold uppercase tracking-wider" style={{
-            backgroundColor: 'rgba(255, 215, 0, 0.1)',
-            color: '#ffd700',
-            border: '1px solid rgba(255, 215, 0, 0.3)'
+            backgroundColor: 'rgba(255, 149, 0, 0.1)',
+            color: '#ff9500',
+            border: '1px solid rgba(255, 149, 0, 0.3)'
           }}>
             מידע משפטי
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight" style={{ color: '#ffd700' }}>
+          <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight" style={{ color: '#ff9500' }}>
             הצהרת אחריות
           </h1>
           
@@ -34,7 +34,7 @@ export default function DisclaimerPage() {
           
           {/* Main sections - minimal */}
           <section className="glass-light border rounded-lg p-5" style={{ borderColor: 'rgba(138, 138, 138, 0.2)' }}>
-            <h2 className="text-lg font-bold mb-2" style={{ color: '#ffd700' }}>
+            <h2 className="text-lg font-bold mb-2" style={{ color: '#ff9500' }}>
               הצהרה כללית
             </h2>
             <p className="text-sm leading-relaxed mb-2" style={{ color: '#b0b0b0' }}>

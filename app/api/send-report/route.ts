@@ -53,22 +53,22 @@ export async function POST(request: NextRequest) {
     
     <!-- Elegant Header -->
     <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); padding: 50px 40px; text-align: center; position: relative;">
-      <div style="width: 60px; height: 3px; background: linear-gradient(90deg, #ffd700 0%, #d4af37 100%); margin: 0 auto 20px;"></div>
+      <div style="width: 60px; height: 3px; background: linear-gradient(90deg, #ff9500 0%, #ffb347 100%); margin: 0 auto 20px;"></div>
       <h1 style="margin: 0; color: #ffffff; font-size: 42px; font-weight: 300; letter-spacing: 1px;">MoneyHarbor</h1>
-      <p style="margin: 12px 0 0; color: #d4af37; font-size: 14px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Investment Intelligence</p>
+      <p style="margin: 12px 0 0; color: #ffb347; font-size: 14px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Investment Intelligence</p>
     </div>
 
     <!-- Main Content -->
     <div style="padding: 50px 40px;">
       <h2 style="color: #1a1a1a; font-size: 28px; font-weight: 300; margin: 0 0 10px 0; text-align: right;">הדו״ח המותאם שלך מוכן</h2>
-      <div style="width: 40px; height: 2px; background: #d4af37; margin: 0 0 25px auto;"></div>
+      <div style="width: 40px; height: 2px; background: #ffb347; margin: 0 0 25px auto;"></div>
       
       <p style="color: #4a4a4a; font-size: 16px; line-height: 1.9; margin-bottom: 30px; text-align: right;">
         ${fullName ? `שלום ${fullName},` : 'שלום רב,'}
       </p>
       
       <p style="color: #4a4a4a; font-size: 16px; line-height: 1.9; margin-bottom: 30px; text-align: right;">
-        מצורף דו״ח השקעה מקצועי ומפורט שהוכן במיוחד עבורך על <strong style="color: #d4af37; font-weight: 600;">${investment.name}</strong>.
+        מצורף דו״ח השקעה מקצועי ומפורט שהוכן במיוחד עבורך על <strong style="color: #ffb347; font-weight: 600;">${investment.name}</strong>.
       </p>
       
       <p style="color: #4a4a4a; font-size: 16px; line-height: 1.9; margin-bottom: 35px; text-align: right;">
@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
       </p>
       
       <!-- Attachment Box -->
-      <div style="background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%); border: 1px solid #d4af37; border-right: 4px solid #d4af37; border-radius: 8px; padding: 25px; margin-bottom: 35px;">
+      <div style="background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%); border: 1px solid #ffb347; border-right: 4px solid #ffb347; border-radius: 8px; padding: 25px; margin-bottom: 35px;">
         <p style="margin: 0; color: #1a1a1a; font-size: 15px; font-weight: 600; text-align: right;">
           קובץ PDF מצורף למייל זה
         </p>
