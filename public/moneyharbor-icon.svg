@@ -1,0 +1,48 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="60%" stop-color="#0f0f0f"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffdc80"/>
+      <stop offset="40%" stop-color="#ffb347"/>
+      <stop offset="100%" stop-color="#ff7b19"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bgGlow)" rx="256"/>
+  <circle cx="256" cy="256" r="210" fill="url(#ring)"/>
+  <circle cx="256" cy="256" r="170" fill="#ffffff"/>
+
+  <!-- Anchor -->
+  <g transform="translate(156,126)">
+    <!-- top ring -->
+    <circle cx="100" cy="60" r="28" fill="#0a0a0a"/>
+    <circle cx="100" cy="60" r="16" fill="#ffffff"/>
+
+    <!-- shaft -->
+    <rect x="88" y="96" width="24" height="180" rx="6" fill="#0a0a0a"/>
+
+    <!-- arms -->
+    <path d="M100 190 C60 180, 36 212, 36 230 L36 248 C60 220, 100 220, 100 220" fill="#0a0a0a"/>
+    <path d="M100 190 C140 180, 164 212, 164 230 L164 248 C140 220, 100 220, 100 220" fill="#0a0a0a"/>
+
+    <!-- anchor base -->
+    <path d="M36 250 C80 288, 120 288, 164 250" stroke="#0a0a0a" stroke-width="18" stroke-linecap="round" fill="none"/>
+
+    <!-- crossbar -->
+    <rect x="36" y="150" width="128" height="24" rx="12" fill="#0a0a0a"/>
+
+    <!-- accent dots -->
+    <circle cx="44" cy="162" r="8" fill="#ff9500"/>
+    <circle cx="156" cy="162" r="8" fill="#ff9500"/>
+  </g>
+
+  <!-- Floating glow dots -->
+  <circle cx="420" cy="112" r="14" fill="#ffb347" opacity="0.8"/>
+  <circle cx="96" cy="400" r="10" fill="#ff9500" opacity="0.7"/>
+  <circle cx="440" cy="360" r="6" fill="#ff7b19" opacity="0.5"/>
+</svg>
+
