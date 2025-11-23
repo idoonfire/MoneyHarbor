@@ -174,7 +174,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
           <p className="text-xs" style={{ color: '#8a8a8a' }}>
             {currentStep === 1 && 'בואו נתחיל עם הבסיס - כמה וכמה זמן?'}
             {currentStep === 2 && 'עכשיו נדבר על הסיכון והמצב האישי שלך'}
-            {currentStep === 3 && 'ספר ליועץ ההשקעות AI - מה חשוב לך?'}
+            {currentStep === 3 && 'ספר למערכת שלנו - מה חשוב לך?'}
           </p>
         </div>
       </div>
@@ -431,12 +431,12 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
             {/* AI Agent Prompt - Required */}
             <div>
               <label className="text-base font-semibold uppercase tracking-wider mb-3 block" style={{ color: '#b0b0b0' }}>
-                💬 שתף את יועץ ההשקעות AI שלנו <span className="text-sm normal-case" style={{ color: '#ffd700' }}>*</span>
+                💬 ספר למערכת שלנו <span className="text-sm normal-case" style={{ color: '#ffd700' }}>*</span>
               </label>
               <textarea
                 value={additionalNotes}
                 onChange={(e) => setAdditionalNotes(e.target.value)}
-                placeholder='ספר ליועץ שלנו - מה חשוב לך? יש העדפות מיוחדות?&#10;&#10;לדוגמה:&#10;• "אני מעוניין בהשקעה בתל אביב 125"&#10;• "רוצה להימנע מקריפטו"&#10;• "מחפש משהו עם נזילות גבוהה"&#10;• "חשוב לי דיבידנדים קבועים"'
+                placeholder='ספר לנו - מה חשוב לך? יש העדפות מיוחדות?&#10;&#10;לדוגמה:&#10;• "אני מעוניין בהשקעה בתל אביב 125"&#10;• "רוצה להימנע מקריפטו"&#10;• "מחפש משהו עם נזילות גבוהה"&#10;• "חשוב לי דיבידנדים קבועים"'
                 rows={6}
                 maxLength={200}
                 required
@@ -450,7 +450,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
               />
               <div className="flex justify-between mt-2">
                 <p className="text-xs" style={{ color: additionalNotes.length >= 15 ? '#10b981' : '#ffd700' }}>
-                  🤖 {additionalNotes.length >= 15 ? 'מעולה! היועץ מבין בדיוק מה אתה צריך' : 'ספר עוד כמה מילים כדי שהיועץ יבין טוב יותר'}
+                  🤖 {additionalNotes.length >= 15 ? 'מעולה! המערכת מבינה בדיוק מה אתה צריך' : 'ספר עוד כמה מילים כדי שהמערכת תבין טוב יותר'}
                 </p>
                 <span className="text-xs" style={{ color: additionalNotes.length >= 15 ? '#10b981' : '#5a5a5a' }}>
                   {additionalNotes.length}/200
@@ -517,7 +517,7 @@ export default function FilterForm({ onSubmit, isLoading }: FilterFormProps) {
                 letterSpacing: '0.02em'
               }}
             >
-              {isLoading ? 'היועץ עובד...' : canSubmit() ? '🤖 היועץ ימצא לך נמל' : '⚠️ השלם את הפרטים'}
+              {isLoading ? 'המערכת עובדת...' : canSubmit() ? '🤖 מצא לי נמל' : '⚠️ השלם את הפרטים'}
             </button>
           )}
         </div>

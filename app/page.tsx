@@ -358,7 +358,7 @@ export default function Home() {
                   {loadingStep === 0 && <><span className="text-2xl animate-bounce">🔍</span> <span>מנתח את הפרופיל שלך...</span></>}
                   {loadingStep === 1 && <><span className="text-2xl animate-bounce">💼</span> <span>בוחן אפשרויות השקעה בשוק...</span></>}
                   {loadingStep === 2 && <><span className="text-2xl animate-bounce">⚖️</span> <span>משווה בין עשרות אפשרויות...</span></>}
-                  {loadingStep === 3 && <><span className="text-2xl animate-bounce">✨</span> <span>מכין המלצות מותאמות אישית...</span></>}
+                  {loadingStep === 3 && <><span className="text-2xl animate-bounce">✨</span> <span>מכין אפשרויות מותאמות אישית...</span></>}
                 </p>
               </div>
               
@@ -416,10 +416,10 @@ export default function Home() {
             {/* Results Header with Disclaimer */}
             <div className="text-center mb-10">
               <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#e5e4e2' }}>
-                ההמלצות עבורך
+                אפשרויות השקעה עבורך
               </h2>
               <p className="text-sm max-w-2xl mx-auto leading-relaxed mb-4" style={{ color: '#8a8a8a' }}>
-                הצעות אלו מבוססות על הפרמטרים שהזנתם. זה לא ייעוץ אישי. 
+                הצעות אלו מבוססות על הפרמטרים שהזנתם. זה כלי חינוכי בלבד ולא ייעוץ אישי. 
                 <a href="/disclaimer" className="underline" style={{ color: '#ffd700' }}>קרא עוד</a>
               </p>
               
@@ -434,7 +434,7 @@ export default function Home() {
                   boxShadow: '0 4px 20px rgba(255, 215, 0, 0.2)'
                 }}
               >
-                📊 השווה את ההמלצות
+                📊 השווה את האפשרויות
               </button>
               <p className="text-xs mt-2" style={{ color: '#5a5a5a' }}>
                 ראה טבלת השוואה מפורטת של כל האפשרויות
